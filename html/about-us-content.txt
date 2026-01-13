@@ -1,0 +1,169 @@
+<!-- Replace lines 138-193 with this content -->
+
+          <!-- 01 About Us -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">01</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">About us</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h3 class="mb-0">We Are Building the Backbone of Modern Businesses</h3>
+                <p class="mb-0 fs-5 text-dark">One Layer was created to solve a global problem: Businesses don't fail because of lack of ideas. They fail because of lack of infrastructure. We exist to replace scattered tools, agencies, and freelancers with one structured layer that runs a business end-to-end.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02 Our Story -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">02</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">Our Story</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h3 class="mb-0">Why One Layer Exists</h3>
+                <p class="mb-0 fs-5 text-dark">Most businesses operate on: Random tools, Disconnected vendors, Manual processes, Short-term campaigns. This creates chaos, dependency, and slow growth. One Layer was built to change that. We didn't want to be another agency selling services. We wanted to build infrastructure that compounds. So we created One Layer - a single, scalable system that supports a business from day one to global scale.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03 What We Do -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">03</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">What We Do</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h3 class="mb-0">We Design How Businesses Run</h3>
+                <p class="mb-0 fs-5 text-dark">One Layer builds: Operational systems, Growth engines, Automation pipelines, Sales infrastructure, AI-powered workflows. We don't "manage marketing." We engineer business systems. If your business were a machine - One Layer would be the operating system.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04 Philosophy -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">04</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">Philosophy</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h3 class="mb-0">Infrastructure Before Growth</h3>
+                <p class="mb-0 fs-5 text-dark">Marketing without systems breaks. Growth without automation collapses. Scale without structure fails. That's why our approach is layered: Foundation first, Growth second, Scale last. Each layer strengthens the next.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 05 Our Vision -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">05</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">Our Vision</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h3 class="mb-0">To Become the World's Leading Business Infrastructure Company</h3>
+                <p class="mb-0 fs-5 text-dark">We envision a future where: Founders don't juggle 10 tools, Businesses don't rely on random agencies, Systems run automatically, Growth is predictable, Scale is frictionless. One Layer aims to power 100,000+ businesses globally by 2030.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 06 Our Mission -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">06</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">Our Mission</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h3 class="mb-0">Build Once. Scale Forever.</h3>
+                <p class="mb-0 fs-5 text-dark">Our mission is to: Simplify business operations, Automate growth, Reduce human dependency, Enable global scalability. We want every business - from India to the world - to operate like a well-funded startup.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 07 India Built -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">07</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">India Built</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <p class="mb-0 fs-5 text-dark">One Layer is proudly built in India, designed for the world. We work with: Indian startups, Global founders, Remote-first companies, Enterprises expanding internationally. Infrastructure has no borders.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 08 Who We Serve -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">08</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">Who We Serve</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <p class="mb-0 fs-5 text-dark">Startup founders, Solo entrepreneurs, Service companies, D2C brands, Funded startups, Enterprises. If you believe systems > shortcuts, One Layer is built for you.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 09 How We Work -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">09</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">How We Work</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <h3 class="mb-0">One Partner. One Layer. Long-Term.</h3>
+                <p class="mb-0 fs-5 text-dark">We don't do one-off projects. We build long-term infrastructure partnerships. You grow. We upgrade the systems. The business compounds.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10 FAQs -->
+          <div class="row gap-4 gap-lg-0">
+            <div class="col-lg-4">
+              <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-primary text-dark rounded-pill fs-2 fw-semibold px-3 py-2">10</span>
+                <span class="badge bg-dark text-white rounded-pill fs-7 fw-normal px-4 py-2">FAQs</span>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="d-flex flex-column gap-4 gap-lg-5" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+                <div class="d-flex flex-column gap-3">
+                  <h4 class="mb-0">What is One Layer's vision?</h4>
+                  <p class="mb-0 fs-5 text-dark">One Layer's vision is to become the global business infrastructure company powering startups and enterprises with scalable systems and automation.</p>
+                </div>
+                <div class="d-flex flex-column gap-3">
+                  <h4 class="mb-0">Is One Layer a software company?</h4>
+                  <p class="mb-0 fs-5 text-dark">No. One Layer is an infrastructure partner that designs and implements systems using the best tools, platforms, and automation technologies.</p>
+                </div>
+                <div class="d-flex flex-column gap-3">
+                  <h4 class="mb-0">Why was One Layer created?</h4>
+                  <p class="mb-0 fs-5 text-dark">One Layer was created to eliminate chaos in business operations and replace fragmented tools and agencies with one scalable infrastructure.</p>
+                </div>
+              </div>
+            </div>
+          </div>

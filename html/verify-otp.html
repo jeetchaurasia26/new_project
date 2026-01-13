@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Verify OTP | One Layer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+
+<body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
+
+  <div class="card p-4 shadow" style="max-width: 400px; width:100%;">
+    <h4 class="mb-3 text-center">Verify OTP</h4>
+    <p class="text-muted text-center">
+      Enter the 6‑digit code sent to your email
+    </p>
+
+    <form id="otp-form">
+      <input
+        type="text"
+        id="otp"
+        class="form-control text-center fs-4 mb-3"
+        placeholder="Enter OTP"
+        maxlength="6"
+        required
+      >
+
+      <button type="submit" class="btn btn-dark w-100">
+        Verify & Continue
+      </button>
+    </form>
+  </div>
+
+<script type="module" src="../assets/js/supabase.js"></script>
+<script type="module" src="../assets/js/verify-otp.js"></script>
+
+</body>
+</html>
+
