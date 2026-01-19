@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 
 <head>
@@ -13,10 +13,18 @@
 
 <body>
 
+  <!-- Header with WhatsApp Button (simplified for 404 page) -->
+  <div class="position-fixed top-0 start-0 w-100 p-3 d-flex justify-content-end" style="z-index: 10;">
+    <a href="https://wa.link/w8jxpn" target="_blank" class="whatsapp-btn">
+      <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+      <span>WhatsApp Chat</span>
+    </a>
+  </div>
+
   <!--  Page Wrapper -->
   <div class="page-wrapper overflow-hidden">
 
-    <!--  Get in touch Section -->
+    <!--  404 Section -->
     <section
       class="bg-light-gray border-top border-primary border-4 d-flex align-items-center justify-content-center min-vh-100">
       <div class="container py-3">
@@ -37,7 +45,7 @@
   </div>
 
   <div class="get-template hstack gap-2">
-    
+
     <button class="btn bg-primary p-2 round-52 rounded-circle hstack justify-content-center flex-shrink-0"
       id="scrollToTopBtn">
       <iconify-icon icon="lucide:arrow-up-right" class="fs-7 text-dark"></iconify-icon>
@@ -52,8 +60,53 @@
   <script src="../assets/js/custom.js"></script>
   <!-- solar icons -->
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+  <!-- Layer Navigation Sidebar -->
+  <div class="layer-sidebar" id="layerSidebar">
+    <div class="layer-links-wrapper">
+      <a href="foundation-layer.html" class="layer-link" data-layer="foundation">Foundation Layer</a>
+      <a href="growth-layer.html" class="layer-link" data-layer="growth">Growth Layer</a>
+      <a href="scale-layer.html" class="layer-link" data-layer="scale">Scale Layer</a>
+      <a href="enterprise-layer.html" class="layer-link" data-layer="enterprise">Enterprise Layer</a>
+      <a href="global-layer.html" class="layer-link" data-layer="global">Global Layer</a>
+      <a href="data-security-layer.html" class="layer-link" data-layer="data-security">Data & Security Layer</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const sidebar = document.getElementById('layerSidebar');
+      const bannerSection = document.querySelector('.banner-section');
+      const footer = document.querySelector('footer');
+      const menuToggle = document.querySelector('.toggle-menu');
+
+      function updateSidebarVisibility() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const bannerBottom = bannerSection ? bannerSection.offsetTop + bannerSection.offsetHeight : 0;
+        const footerTop = footer ? footer.offsetTop : document.body.scrollHeight;
+        const viewportBottom = scrollY + windowHeight;
+        const menuOpen = menuToggle && menuToggle.getAttribute('aria-expanded') === 'true';
+
+        if (scrollY < bannerBottom - 100 || viewportBottom > footerTop - 50 || menuOpen) {
+          sidebar.classList.add('hidden');
+        } else {
+          sidebar.classList.remove('hidden');
+        }
+      }
+
+      window.addEventListener('scroll', updateSidebarVisibility);
+      window.addEventListener('resize', updateSidebarVisibility);
+      document.addEventListener('click', updateSidebarVisibility);
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function () {
+          setTimeout(updateSidebarVisibility, 50);
+        });
+      }
+      updateSidebarVisibility();
+    })();
+  </script>
+
 </body>
 
 </html>
-
-
