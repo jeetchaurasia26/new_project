@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 
 <head>
@@ -26,6 +26,12 @@
           </a>
         </div>
         <div class="d-flex align-items-center gap-4">
+
+          <!-- WhatsApp Button -->
+          <a href="https://wa.link/w8jxpn" target="_blank" class="whatsapp-btn">
+            <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+            <span>WhatsApp Chat</span>
+          </a>
 
           <div class="btn-group">
             <button
@@ -217,14 +223,13 @@
             <p class="mb-0 text-white">Building, scaling, marketing, and automating businesses worldwide through a
               single integrated infrastructure layer.</p>
             <div class="d-flex flex-column gap-2">
-              <a href="mailto:info@onelayer.in" target="_blank" class="link-hover hstack gap-3 text-white fs-5">
-                <iconify-icon icon="lucide:arrow-up-right" class="fs-7 text-dark"></iconify-icon>
-                info@onelayer.in
+              <a href="tel:+918287818375" target="_blank" class="link-hover hstack gap-3 text-white fs-5">
+                <iconify-icon icon="lucide:phone" class="fs-7 text-primary"></iconify-icon>
+                +91 828 781 8375
               </a>
-              <a href="mailto:info@onelayer.in" target="_blank"
-                class="link-hover hstack gap-3 text-white fs-5">
-                <iconify-icon icon="lucide:arrow-up-right" class="fs-7 text-dark"></iconify-icon>
-                contact@onelayer.in
+              <a href="mailto:info@onelayer.in" target="_blank" class="link-hover hstack gap-3 text-white fs-5">
+                <iconify-icon icon="lucide:mail" class="fs-7 text-primary"></iconify-icon>
+                info@onelayer.in
               </a>
             </div>
           </div>
@@ -251,10 +256,11 @@
           </ul>
         </div>
         <div class="col-md-4 col-xl-3 mb-8 mb-xl-0">
-          <li><a class="mb-0 ink-hover fs-5 text-white" href="terms-and-conditions.html">Terms & Conditions</a></li>
-          <li><a class="mb-0 ink-hover fs-5 text-white" href="privacy-policy.html">Privacy Policy</a></li>
-          <li><a class="mb-0 ink-hover fs-5 text-white" href="#!">Refund & Cancellation Policy</a></li>
-          <li><a class="mb-0 ink-hover fs-5 text-white" href="#!">Disclaimer</a></li>
+          <li class="mb-1"><a class="mb-0 ink-hover fs-5 text-white" href="terms-and-conditions.html">Terms &
+              Conditions</a></li>
+          <li class="mb-1"><a class="mb-0 ink-hover fs-5 text-white" href="privacy-policy.html">Privacy Policy</a></li>
+          <li class="mb-1"><a class="mb-0 ink-hover fs-5 text-white" href="#!">Refund & Cancellation Policy</a></li>
+          <li class="mb-1"><a class="mb-0 ink-hover fs-5 text-white" href="#!">Disclaimer</a></li>
           <li><a class="mb-0 ink-hover fs-5 text-white" href="#!">Enterprise Service Agreement</a></li>
         </div>
       </div>
@@ -281,6 +287,53 @@
 
 
 
+
+
+  <!-- Layer Navigation Sidebar -->
+  <div class="layer-sidebar" id="layerSidebar">
+    <div class="layer-links-wrapper">
+      <a href="foundation-layer.html" class="layer-link" data-layer="foundation">Foundation Layer</a>
+      <a href="growth-layer.html" class="layer-link" data-layer="growth">Growth Layer</a>
+      <a href="scale-layer.html" class="layer-link" data-layer="scale">Scale Layer</a>
+      <a href="enterprise-layer.html" class="layer-link" data-layer="enterprise">Enterprise Layer</a>
+      <a href="global-layer.html" class="layer-link" data-layer="global">Global Layer</a>
+      <a href="data-security-layer.html" class="layer-link" data-layer="data-security">Data & Security Layer</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const sidebar = document.getElementById('layerSidebar');
+      const bannerSection = document.querySelector('.banner-section');
+      const footer = document.querySelector('footer');
+      const menuToggle = document.querySelector('.toggle-menu');
+
+      function updateSidebarVisibility() {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const bannerBottom = bannerSection ? bannerSection.offsetTop + bannerSection.offsetHeight : 0;
+        const footerTop = footer ? footer.offsetTop : document.body.scrollHeight;
+        const viewportBottom = scrollY + windowHeight;
+        const menuOpen = menuToggle && menuToggle.getAttribute('aria-expanded') === 'true';
+
+        if (scrollY < bannerBottom - 100 || viewportBottom > footerTop - 50 || menuOpen) {
+          sidebar.classList.add('hidden');
+        } else {
+          sidebar.classList.remove('hidden');
+        }
+      }
+
+      window.addEventListener('scroll', updateSidebarVisibility);
+      window.addEventListener('resize', updateSidebarVisibility);
+      document.addEventListener('click', updateSidebarVisibility);
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function () {
+          setTimeout(updateSidebarVisibility, 50);
+        });
+      }
+      updateSidebarVisibility();
+    })();
+  </script>
 
 </body>
 
