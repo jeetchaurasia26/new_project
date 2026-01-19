@@ -43,53 +43,6 @@
 
     <!--  Get in touch Section -->
   </div>
-
-  <!-- Layer Navigation Sidebar -->
-  <div class="layer-sidebar" id="layerSidebar">
-    <div class="layer-links-wrapper">
-      <a href="foundation-layer.html" class="layer-link" data-layer="foundation">Foundation Layer</a>
-      <a href="growth-layer.html" class="layer-link" data-layer="growth">Growth Layer</a>
-      <a href="scale-layer.html" class="layer-link" data-layer="scale">Scale Layer</a>
-      <a href="enterprise-layer.html" class="layer-link" data-layer="enterprise">Enterprise Layer</a>
-      <a href="global-layer.html" class="layer-link" data-layer="global">Global Layer</a>
-      <a href="data-security-layer.html" class="layer-link" data-layer="data-security">Data & Security Layer</a>
-    </div>
-  </div>
-
-  <script>
-    (function () {
-      const sidebar = document.getElementById('layerSidebar');
-      const bannerSection = document.querySelector('.banner-section');
-      const footer = document.querySelector('footer');
-      const menuToggle = document.querySelector('.toggle-menu');
-
-      function updateSidebarVisibility() {
-        const scrollY = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const bannerBottom = bannerSection ? bannerSection.offsetTop + bannerSection.offsetHeight : 0;
-        const footerTop = footer ? footer.offsetTop : document.body.scrollHeight;
-        const viewportBottom = scrollY + windowHeight;
-        const menuOpen = menuToggle && menuToggle.getAttribute('aria-expanded') === 'true';
-
-        if (scrollY < bannerBottom - 100 || viewportBottom > footerTop - 50 || menuOpen) {
-          sidebar.classList.add('hidden');
-        } else {
-          sidebar.classList.remove('hidden');
-        }
-      }
-
-      window.addEventListener('scroll', updateSidebarVisibility);
-      window.addEventListener('resize', updateSidebarVisibility);
-      document.addEventListener('click', updateSidebarVisibility);
-      if (menuToggle) {
-        menuToggle.addEventListener('click', function () {
-          setTimeout(updateSidebarVisibility, 50);
-        });
-      }
-      updateSidebarVisibility();
-    })();
-  </script>
-
 </body>
 
 </html>
