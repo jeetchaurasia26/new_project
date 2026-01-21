@@ -19967,3 +19967,38 @@ iframe[id*="chatbase"] {
     border-radius: 50%;
   }
 }
+/* =====================================================
+   FOOTER SOCIAL MEDIA ICONS
+   ===================================================== */
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.9;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  opacity: 1;
+}
+
+.social-link iconify-icon {
+  font-size: 24px;
+}
+
+/* Responsive layout for mobile */
+@media (max-width: 767px) {
+  .social-icons {
+    margin-top: 12px;
+  }
+}
+
