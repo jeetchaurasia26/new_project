@@ -10,8 +10,9 @@ otpForm.addEventListener("submit", async (e) => {
   const token = document.getElementById("otp").value;
 
   if (!email) {
-    alert("Session expired. Login again.");
-    return window.location.href = "../html/sign-in.html";
+    console.warn("No auth_email found in localStorage");
+    alert("Session expired. Please sign in again.");
+    return window.location.href = "sign-in.html";
   }
 
   const { error } = await supabase.auth.verifyOtp({
@@ -23,5 +24,11 @@ otpForm.addEventListener("submit", async (e) => {
   if (error) return alert("Invalid or expired OTP");
 
   localStorage.removeItem("auth_email");
-  window.location.href = "../html/dashboard.html";
+  console.log("OTP Verified! Determining redirect...");
+
+  if (email === "info@onelayer.in") {
+    window.location.href = "admin/dashboard.html";
+  } else {
+    window.location.href = "dashboard.html";
+  }
 });
