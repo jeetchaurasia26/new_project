@@ -3,46 +3,56 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Verify OTP | One Layer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <title>Verify OTP | One Layer</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 
-<body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
+<body
+  class="bg-light-gray border-top border-primary border-4 d-flex align-items-center justify-content-center min-vh-100">
 
-  <div class="card p-4 shadow" style="max-width: 400px; width:100%;">
+  <!-- WhatsApp Button -->
+  <div class="position-fixed top-0 start-0 w-100 p-3 d-flex justify-content-end" style="z-index: 10;">
+    <a href="https://wa.link/w8jxpn" target="_blank" class="whatsapp-btn">
+      <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
+      <span>WhatsApp Chat</span>
+    </a>
+  </div>
+
+  <!-- OTP Verification Card -->
+  <div class="card p-4 shadow-lg" style="max-width: 400px; width:100%;">
+    <a href="index.html" class="mb-4 hstack justify-content-center">
+      <img src="../assets/images/logos/onelayer-logo-white.svg" alt="logo" class="img-fluid" style="max-width: 150px;">
+    </a>
+
     <h4 class="mb-3 text-center">Verify OTP</h4>
-    <p class="text-muted text-center">
-      Enter the 6‑digit code sent to your email
+    <p class="text-muted text-center mb-4">
+      Enter the 6-digit code sent to your email
     </p>
 
     <form id="otp-form">
       <input type="text" id="otp" class="form-control text-center fs-4 mb-3" placeholder="Enter OTP" maxlength="6"
         required>
 
-      <button type="submit" class="btn btn-dark w-100">
+      <button type="submit" class="btn btn-dark w-100 justify-content-center py-2 fw-medium fs-5">
         Verify & Continue
       </button>
     </form>
   </div>
 
+  <!-- Scripts -->
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
   <script type="module" src="../assets/js/supabase.js"></script>
   <script type="module" src="../assets/js/verify-otp.js"></script>
+  <script>
+    console.log("Verify OTP page loaded at:", new Date().toLocaleTimeString());
+    console.log("Email in localStorage:", localStorage.getItem("auth_email"));
+  </script>
 
-  <!--  Page Wrapper -->
-  <div class="page-wrapper overflow-hidden">
-
-    <!-- Header with WhatsApp Button (simplified for verify-otp page) -->
-    <div class="position-fixed top-0 start-0 w-100 p-3 d-flex justify-content-end" style="z-index: 10;">
-      <a href="https://wa.link/w8jxpn" target="_blank" class="whatsapp-btn">
-        <iconify-icon icon="logos:whatsapp-icon"></iconify-icon>
-        <span>WhatsApp Chat</span>
-      </a>
-    </div>
-
-    <!--  Get in touch Section -->
-  </div>
 </body>
 
 </html>

@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard | One Layer</title>
+    <link rel="shortcut icon" type="image/png" href="../../assets/images/logos/favicon.svg" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../assets/libs/aos-master/dist/aos.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <!-- Reuse client dashboard styles from assets -->
+</head>
+
+<body class="bg-light-gray">
+
+    <!-- Admin Header -->
+    <header class="header bg-dark border-bottom border-4 border-primary position-sticky top-0" style="z-index: 1000;">
+        <div class="container-fluid">
+            <div class="row align-items-center py-2">
+                <!-- Logo -->
+                <div class="col-auto">
+                    <a href="../index.html">
+                        <img src="../../assets/images/logos/onelayer-logo-white.svg" alt="One Layer" class="img-fluid"
+                            style="height: 35px;">
+                    </a>
+                </div>
+
+                <!-- Page Title -->
+                <div class="col-auto d-none d-lg-block">
+                    <h6 class="mb-0 text-white fw-semibold">Admin Panel</h6>
+                </div>
+
+                <!-- Actions -->
+                <div class="col-auto d-flex gap-3 align-items-center ms-auto">
+                    <button id="logoutBtn" class="btn btn-outline-light btn-sm">
+                        <iconify-icon icon="solar:logout-2-outline" class="me-1"></iconify-icon>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Admin Wrapper -->
+    <div class="d-flex">
+
+        <!-- Admin Sidebar -->
+        <aside class="sidebar bg-white border-end shadow-sm" style="width: 280px; min-height: calc(100vh - 70px);">
+            <div class="p-4">
+                <h6 class="text-uppercase mb-4 fw-bold"
+                    style="font-size: 0.75rem; letter-spacing: 1px; color: rgba(31, 42, 46, 0.6);">Management</h6>
+
+                <ul class="list-unstyled">
+                    <!-- Home -->
+                    <li class="mb-2">
+                        <button
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded active"
+                            data-section="overview">
+                            <span
+                                class="round-36 bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:widget-add-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Admin Overview</span>
+                        </button>
+                    </li>
+
+                    <!-- User Details (Management) -->
+                    <li class="mb-2">
+                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+                            data-section="users">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:users-group-rounded-bold"
+                                    class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">User Details</span>
+                        </button>
+                    </li>
+
+                    <!-- Bulk Uploads (Work/Reports) -->
+                    <li class="mb-2">
+                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+                            data-section="uploads">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:cloud-upload-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Upload Center</span>
+                        </button>
+                    </li>
+
+                    <!-- All Tickets -->
+                    <li class="mb-2">
+                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+                            data-section="tickets">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:chat-square-call-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Support Desk</span>
+                        </button>
+                    </li>
+
+                    <!-- Billing Review -->
+                    <li class="mb-2">
+                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+                            data-section="billing">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:card-2-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Finance Control</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Admin Content Area -->
+        <main class="flex-grow-1 p-4" style="min-height: calc(100vh - 70px);">
+            <div class="container-fluid">
+
+                <!-- Section Title & Global Search -->
+                <div class="row align-items-center mb-4" data-aos="fade-up">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold text-dark mb-1" id="adminSectionTitle">Admin Overview</h2>
+                        <p class="text-muted mb-0" id="adminSectionDesc">Manage users, progress reports, and system-wide
+                            support.</p>
+                    </div>
+                    <div class="col-lg-6 mt-3 mt-lg-0">
+                        <div class="input-group shadow-sm rounded-pill overflow-hidden bg-white border">
+                            <span class="input-group-text bg-white border-0 ps-3">
+                                <iconify-icon icon="solar:magnifer-linear" class="text-muted fs-5"></iconify-icon>
+                            </span>
+                            <input type="text" id="globalUserSearch" class="form-control border-0 py-2 bg-white"
+                                placeholder="Search user by email ID..." style="box-shadow: none;">
+                            <button class="btn btn-primary px-4 fw-bold" id="searchUserBtn"
+                                style="border-radius: 0 50px 50px 0;">Search</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Content Sections -->
+                <div id="admin-content">
+
+                    <!-- Overview Tab -->
+                    <div id="section-overview" class="admin-tab">
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-3">
+                                <div class="card border-0 shadow-sm p-4 h-100">
+                                    <h6 class="text-muted small text-uppercase fw-bold">Total Clients</h6>
+                                    <h2 class="fw-bold mb-0" id="statTotalUsers">...</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-0 shadow-sm p-4 h-100">
+                                    <h6 class="text-muted small text-uppercase fw-bold">Active Tickets</h6>
+                                    <h2 class="fw-bold mb-0" id="statOpenTickets" style="color: #FF7272;">...</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-0 shadow-sm p-4 h-100">
+                                    <h6 class="text-muted small text-uppercase fw-bold">Pending Reports</h6>
+                                    <h2 class="fw-bold mb-0" id="statPendingReports">...</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card border-0 shadow-sm p-4 h-100">
+                                    <h6 class="text-muted small text-uppercase fw-bold">Revenue (MTD)</h6>
+                                    <h2 class="fw-bold mb-0" id="statRevenue">...</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Details Tab -->
+                    <div id="section-users" class="admin-tab d-none">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>User / Company</th>
+                                                <th>Email</th>
+                                                <th>Status</th>
+                                                <th>Plan</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="userTableBody">
+                                            <!-- To be populated dynamically -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Center Tab -->
+                    <div id="section-uploads" class="admin-tab d-none">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="fw-bold mb-4">Post Updates to Users</h5>
+                                <form id="bulkUpdateForm">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Target User Email <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="email" id="targetUserEmail" class="form-control"
+                                                placeholder="user@example.com" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Update Type <span
+                                                    class="text-danger">*</span></label>
+                                            <select id="updateType" class="form-select" required>
+                                                <option value="progress">Work Progress Update</option>
+                                                <option value="report">Weekly Report PDF</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Message / Details</label>
+                                            <textarea id="updateMessage" class="form-control" rows="3"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Document Attachment</label>
+                                            <input type="file" id="updateFile" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary">Post to User Portal</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/libs/aos-master/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <!-- Admin Domain Scripts -->
+    <script type="module">
+        import { requireAdmin } from "../../assets/js/admin-guard.js";
+        import { supabase } from "../../assets/js/supabase.js";
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            // Guard: info@onelayer.in ONLY
+            await requireAdmin();
+            AOS.init({ once: true });
+
+            // Initialize Admin Logic
+            initAdminNavigation();
+            initGlobalSearch();
+            loadAdminStats();
+        });
+
+        async function loadAdminStats() {
+            try {
+                const { count: userCount } = await supabase.from('user_profiles').select('*', { count: 'exact', head: true });
+                const { count: ticketCount } = await supabase.from('support_tickets').select('*', { count: 'exact', head: true }).eq('status', 'open');
+                const { count: reportCount } = await supabase.from('weekly_reports').select('*', { count: 'exact', head: true });
+                const { data: invoices } = await supabase.from('invoices').select('amount').eq('status', 'paid');
+
+                const revenue = invoices ? invoices.reduce((acc, inv) => acc + inv.amount, 0) : 0;
+
+                document.getElementById('statTotalUsers').innerText = userCount || "0";
+                document.getElementById('statOpenTickets').innerText = ticketCount || "0";
+                document.getElementById('statPendingReports').innerText = reportCount || "0";
+                document.getElementById('statRevenue').innerText = "₹" + revenue.toLocaleString();
+
+            } catch (err) { console.error("Admin stats error:", err); }
+        }
+
+        function initAdminNavigation() {
+            const links = document.querySelectorAll(".menu-link");
+            links.forEach(link => {
+                link.addEventListener("click", () => {
+                    links.forEach(l => l.classList.remove("active"));
+                    link.classList.add("active");
+
+                    const target = link.dataset.section;
+                    document.querySelectorAll(".admin-tab").forEach(tab => tab.classList.add("d-none"));
+                    document.getElementById(`section-${target}`).classList.remove("d-none");
+
+                    document.getElementById("adminSectionTitle").innerText = link.querySelector("span:last-child").innerText;
+                });
+            });
+        }
+
+        function initGlobalSearch() {
+            const searchBtn = document.getElementById("searchUserBtn");
+            const searchInput = document.getElementById("globalUserSearch");
+
+            async function triggerSearch() {
+                const email = searchInput.value.trim();
+                if (!email) return;
+                window.location.href = `users.html?search=${email}`;
+            }
+
+            searchBtn.addEventListener("click", triggerSearch);
+            searchInput.addEventListener("keypress", (e) => {
+                if (e.key === 'Enter') triggerSearch();
+            });
+        }
+
+        // Logout
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
+            await supabase.auth.signOut();
+            window.location.replace("../sign-in.html");
+        });
+    </script>
+
+    <style>
+        .sidebar {
+            position: sticky;
+            top: 70px;
+            height: calc(100vh - 70px);
+        }
+
+        .menu-link {
+            border: none;
+            background: transparent;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .menu-link:hover {
+            background: #f8f9fa;
+        }
+
+        .menu-link.active {
+            background: #C1FF72 !important;
+            font-weight: 600;
+        }
+
+        .menu-link.active span:first-child {
+            background: white !important;
+        }
+
+        .bg-light-gray {
+            background-color: #f4f8fa;
+        }
+
+        .round-36 {
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+        }
+
+        .header {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #globalUserSearch:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+</body>
+
+</html>

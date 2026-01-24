@@ -1,120 +1,773 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <title>Client Dashboard | One Layer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Client Dashboard | One Layer</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
 
-  <link rel="stylesheet" href="../assets/css/styles.css">
-  <link rel="stylesheet" href="../assets/libs/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../assets/libs/aos-master/dist/aos.css">
+  <link rel="stylesheet" href="../assets/css/styles.css" />
 </head>
 
-<body class="bg-light">
+<body>
 
-  <!-- TOP BAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">One Layer</a>
-      <button class="btn btn-outline-danger btn-sm" id="logoutBtn">Logout</button>
-    </div>
-  </nav>
-
-  <h6 class="fw-bold mb-3">Client Menu</h6>
-  <ul class="list-unstyled">
-    <li class="mb-2">
-      <button class="btn btn-link p-0 menu-link" data-section="projects">📊 Work Progress</button>
-    </li>
-    <li class="mb-2">
-      <button class="btn btn-link p-0 menu-link" data-section="reports">📅 Weekly Reports</button>
-    </li>
-    <li class="mb-2">
-      <button class="btn btn-link p-0 menu-link" data-section="invoices">💳 Billing & Invoices</button>
-    </li>
-    <li class="mb-2">
-      <button class="btn btn-link p-0 menu-link" data-section="tickets">🎧 Support Tickets</button>
-    </li>
-    <li class="mb-2">
-      <button class="btn btn-link p-0 menu-link" data-section="account">⚙️ Account Settings</button>
-    </li>
-  </ul>
-  </div>
-  </div>
-  </div>
-
-  <!-- MAIN PANEL -->
-  <div class="col-md-9">
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <h4 class="fw-bold mb-3">Welcome to Your Virtual Office</h4>
-        <p class="text-muted">
-          Here you can track your project progress, reports, payments, and support.
-        </p>
-
-        <!-- DASHBOARD STATS -->
-        <div class="row g-3 mt-4">
-          <div class="col-md-4">
-            <div class="p-3 bg-primary text-white rounded">
-              <h6>Active Projects</h6>
-              <h3 id="stat-projects">0</h3>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 bg-success text-white rounded">
-              <h6>Reports</h6>
-              <h3 id="stat-reports">0</h3>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="p-3 bg-warning text-dark rounded">
-              <h6>Pending Invoices</h6>
-              <h3 id="stat-invoices">₹0</h3>
-            </div>
-          </div>
+  <!-- Header - Reduced height -->
+  <header class="header bg-dark border-bottom border-4 border-primary position-sticky top-0" style="z-index: 1000;">
+    <div class="container-fluid">
+      <div class="row align-items-center py-2">
+        <!-- Logo -->
+        <div class="col-auto">
+          <a href="index.html">
+            <img src="../assets/images/logos/onelayer-logo-white.svg" alt="One Layer" class="img-fluid"
+              style="height: 35px;">
+          </a>
         </div>
 
-        <!-- SECTION CONTENT -->
-        <div id="dashboard-content" class="mt-4">
-
-          <div id="section-projects" class="dashboard-section d-none">
-            <h5>Work Progress</h5>
-            <div id="projectsList" class="mt-3"></div>
-          </div>
-
-          <div id="section-reports" class="dashboard-section d-none">
-            <h5>Weekly Reports</h5>
-            <div id="reportsList" class="mt-3"></div>
-          </div>
-
-          <div id="section-invoices" class="dashboard-section d-none">
-            <h5>Invoices</h5>
-            <div id="invoicesList" class="mt-3"></div>
-          </div>
-
-          <div id="section-tickets" class="dashboard-section d-none">
-            <h5>Support Tickets</h5>
-            <div id="ticketsList" class="mt-3"></div>
-          </div>
-
-          <div id="section-account" class="dashboard-section d-none">
-            <h5>Account Settings</h5>
-            <p class="text-muted mt-2">Profile info will load here...</p>
-          </div>
-
+        <!-- Page Title -->
+        <div class="col">
+          <h6 class="mb-0 text-white fw-semibold">Client Dashboard</h6>
         </div>
 
+        <!-- Actions -->
+        <div class="col-auto">
+
+<!-- Logout -->
+          <button id="logoutBtn" class="btn btn-outline-light btn-sm">
+            <iconify-icon icon="solar:logout-2-outline" class="me-1"></iconify-icon>
+            Logout
+          </button>
+        </div>
       </div>
     </div>
+  </header>
+
+  <!-- Main Wrapper -->
+  <div class="d-flex">
+
+    <!-- Sidebar -->
+    <aside class="sidebar bg-light-gray border-end" style="width: 280px; min-height: calc(100vh - 70px);">
+      <div class="p-4">
+        <h6 class="text-uppercase mb-4 fw-bold text-muted" style="font-size: 0.75rem; letter-spacing: 1px;">Client Menu
+        </h6>
+
+        <ul class="list-unstyled">
+          <!-- Dashboard Overview -->
+          <li class="mb-2">
+            <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded active"
+              data-section="overview">
+              <span
+                class="round-36 bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                <iconify-icon icon="solar:home-bold" class="text-dark fs-6"></iconify-icon>
+              </span>
+              <span class="fw-medium text-dark">Dashboard</span>
+            </button>
+          </li>
+
+          <!-- Work Progress -->
+          <li class="mb-2">
+            <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+              data-section="projects">
+              <span
+                class="round-36 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                <iconify-icon icon="solar:chart-bold" class="text-dark fs-6"></iconify-icon>
+              </span>
+              <span class="fw-medium text-dark">Work Progress</span>
+            </button>
+          </li>
+
+          <!-- Weekly Reports -->
+          <li class="mb-2">
+            <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+              data-section="reports">
+              <span
+                class="round-36 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                <iconify-icon icon="solar:calendar-bold" class="text-dark fs-6"></iconify-icon>
+              </span>
+              <span class="fw-medium text-dark">Weekly Reports</span>
+            </button>
+          </li>
+
+          <!-- Billing & Invoices -->
+          <li class="mb-2">
+            <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+              data-section="invoices">
+              <span
+                class="round-36 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                <iconify-icon icon="solar:bill-list-bold" class="text-dark fs-6"></iconify-icon>
+              </span>
+              <span class="fw-medium text-dark">Billing & Invoices</span>
+            </button>
+          </li>
+
+          <!-- Support Tickets -->
+          <li class="mb-2">
+            <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+              data-section="tickets">
+              <span
+                class="round-36 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                <iconify-icon icon="solar:headphones-round-sound-bold" class="text-dark fs-6"></iconify-icon>
+              </span>
+              <span class="fw-medium text-dark">Support Tickets</span>
+            </button>
+          </li>
+
+          <!-- Account Settings -->
+          <li class="mb-2">
+            <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
+              data-section="account">
+              <span
+                class="round-36 bg-white border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                <iconify-icon icon="solar:settings-bold" class="text-dark fs-6"></iconify-icon>
+              </span>
+              <span class="fw-medium text-dark">Account Settings</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 p-4 bg-light-gray" style="min-height: calc(100vh - 70px);">
+      <div class="container-fluid">
+
+        <!-- Welcome Section -->
+        <div class="mb-4" data-aos="fade-up">
+          <h2 class="fw-bold text-dark mb-2">Welcome to Your Virtual Office</h2>
+          <p class="text-muted mb-0">Track your project progress, reports, payments, and support requests.</p>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="dashboard-content">
+
+          <!-- Overview Section (Default) - WITH STATS -->
+          <div id="section-overview" class="dashboard-section">
+
+            <!-- Stats Cards - Only in Dashboard -->
+            <div class="row g-4 mb-5" data-aos="fade-up" data-aos-delay="100">
+              <!-- Active Projects -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div class="round-52 bg-primary rounded-circle d-flex align-items-center justify-content-center">
+                        <iconify-icon icon="solar:chart-2-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-primary text-dark fw-semibold">Active</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Active
+                      Projects</h6>
+                    <h2 class="fw-bold mb-0 text-dark" id="stat-projects">0</h2>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Weekly Reports -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div
+                        class="round-52 bg-light-gray rounded-circle d-flex align-items-center justify-content-center border">
+                        <iconify-icon icon="solar:document-text-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-light-gray text-dark fw-semibold border">Reports</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Total
+                      Reports</h6>
+                    <h2 class="fw-bold mb-0 text-dark" id="stat-reports">0</h2>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pending Invoices -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div
+                        class="round-52 bg-light-gray rounded-circle d-flex align-items-center justify-content-center border">
+                        <iconify-icon icon="solar:wallet-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-light-gray text-dark fw-semibold border">Pending</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Pending
+                      Amount</h6>
+                    <h2 class="fw-bold mb-0 text-dark" id="stat-invoices">?0</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Overview Content -->
+            <div data-aos="fade-up" data-aos-delay="200">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <h5 class="fw-bold mb-4">Recent Activity</h5>
+                      <div class="activity-list">
+                        <p class="text-muted">No recent activity</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <h5 class="fw-bold mb-4">Quick Actions</h5>
+                      <div class="d-flex flex-column gap-3">
+                        <button class="btn btn-dark w-100 justify-content-center py-3" data-section-trigger="tickets">
+                          <span class="btn-text">Submit New Ticket</span>
+                          <iconify-icon icon="lucide:arrow-up-right"
+                            class="btn-icon bg-white text-dark round-52 rounded-circle hstack justify-content-center fs-7 shadow-sm"></iconify-icon>
+                        </button>
+                        <button class="btn btn-outline-dark w-100 justify-content-center py-3"
+                          data-section-trigger="invoices">
+                          <span class="btn-text">View Invoices</span>
+                          <iconify-icon icon="lucide:arrow-up-right"
+                            class="btn-icon bg-dark text-white round-52 rounded-circle hstack justify-content-center fs-7"></iconify-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projects Section - WITH STATS -->
+          <div id="section-projects" class="dashboard-section d-none">
+
+            <!-- Stats Cards - Only in Work Progress -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+              <!-- Active Projects -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div class="round-52 bg-primary rounded-circle d-flex align-items-center justify-content-center">
+                        <iconify-icon icon="solar:chart-2-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-primary text-dark fw-semibold">Active</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Active
+                      Projects</h6>
+                    <h2 class="fw-bold mb-0 text-dark" id="stat-projects-2">0</h2>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Completed Projects -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div
+                        class="round-52 bg-light-gray rounded-circle d-flex align-items-center justify-content-center border">
+                        <iconify-icon icon="solar:check-circle-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-light-gray text-dark fw-semibold border">Completed</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">
+                      Completed</h6>
+                    <h2 class="fw-bold mb-0 text-dark">0</h2>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Total Hours -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div
+                        class="round-52 bg-light-gray rounded-circle d-flex align-items-center justify-content-center border">
+                        <iconify-icon icon="solar:clock-circle-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-light-gray text-dark fw-semibold border">Hours</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Total
+                      Hours</h6>
+                    <h2 class="fw-bold mb-0 text-dark">0</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Projects Content -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-5">
+                <h5 class="fw-bold mb-4">Work Progress</h5>
+                <div id="projectsList">
+                  <p class="text-muted">No active projects at the moment.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reports Section - WITH STATS -->
+          <div id="section-reports" class="dashboard-section d-none">
+
+            <!-- Stats Cards - Only in Weekly Reports -->
+            <div class="row g-4 mb-5" data-aos="fade-up">
+              <!-- Total Reports -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div class="round-52 bg-primary rounded-circle d-flex align-items-center justify-content-center">
+                        <iconify-icon icon="solar:document-text-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-primary text-dark fw-semibold">Total</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Total
+                      Reports</h6>
+                    <h2 class="fw-bold mb-0 text-dark" id="stat-reports-2">0</h2>
+                  </div>
+                </div>
+              </div>
+
+              <!-- This Month -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div
+                        class="round-52 bg-light-gray rounded-circle d-flex align-items-center justify-content-center border">
+                        <iconify-icon icon="solar:calendar-mark-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-light-gray text-dark fw-semibold border">This Month</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">This
+                      Month</h6>
+                    <h2 class="fw-bold mb-0 text-dark">0</h2>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pending Review -->
+              <div class="col-xl-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100 stat-card">
+                  <div class="card-body p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                      <div
+                        class="round-52 bg-light-gray rounded-circle d-flex align-items-center justify-content-center border">
+                        <iconify-icon icon="solar:eye-bold" class="text-dark fs-3"></iconify-icon>
+                      </div>
+                      <span class="badge bg-light-gray text-dark fw-semibold border">Pending</span>
+                    </div>
+                    <h6 class="text-muted mb-2 text-uppercase" style="font-size: 0.75rem; letter-spacing: 1px;">Pending
+                      Review</h6>
+                    <h2 class="fw-bold mb-0 text-dark">0</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reports Content -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-5">
+                <h5 class="fw-bold mb-4">Weekly Reports</h5>
+                <div id="reportsList">
+                  <p class="text-muted">No reports available yet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Invoices Section - Enhanced with History -->
+          <div id="section-invoices" class="dashboard-section d-none">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h5 class="fw-bold mb-0">Billing & Invoices</h5>
+                  <span class="badge bg-light-gray text-dark border"><span id="pending-amount">?0</span> Pending</span>
+                </div>
+
+                <!-- Current/Pending Invoices -->
+                <div class="mb-5">
+                  <h6 class="fw-semibold mb-3">Current Invoices</h6>
+                  <div id="invoicesList">
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead class="table-light">
+                          <tr>
+                            <th>Invoice #</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody id="current-invoices-body">
+                          <tr>
+                            <td colspan="5" class="text-center text-muted py-4">No current invoices found.</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Payment History -->
+                <div class="mb-5">
+                  <h6 class="fw-semibold mb-3">Payment History</h6>
+                  <div id="payment-history-container">
+                    <!-- Sample structure - will be populated from database -->
+                    <div class="alert alert-info">
+                      <iconify-icon icon="solar:info-circle-bold" class="me-2"></iconify-icon>
+                      No payment history yet. Previous invoices will appear here once payments are processed.
+                    </div>
+
+                    <!-- Example of how paid invoices will appear (hidden by default) -->
+                    <div id="payment-history-list" class="d-none">
+                      <!-- Sample Invoice Card -->
+                      <div class="card mb-3 border">
+                        <div class="card-body">
+                          <div class="row align-items-center">
+                            <div class="col-md-2">
+                              <small class="text-muted d-block">Invoice #</small>
+                              <strong>INV-001</strong>
+                            </div>
+                            <div class="col-md-2">
+                              <small class="text-muted d-block">Payment Date</small>
+                              <strong>15 Jan 2024</strong>
+                            </div>
+                            <div class="col-md-2">
+                              <small class="text-muted d-block">Amount</small>
+                              <strong class="text-success">?25,000</strong>
+                            </div>
+                            <div class="col-md-3">
+                              <small class="text-muted d-block">Status</small>
+                              <span class="badge bg-success">Paid & Verified</span>
+                            </div>
+                            <div class="col-md-3 text-end">
+                              <button class="btn btn-outline-primary btn-sm">
+                                <iconify-icon icon="solar:download-bold" class="me-1"></iconify-icon>
+                                Download Invoice
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- More invoices will be added here dynamically -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Payment Upload Section -->
+                <div class="mt-5 pt-4 border-top">
+                  <h6 class="fw-bold mb-3">Upload Payment Confirmation</h6>
+                  <p class="text-muted small mb-3">Upload proof of payment for pending invoices. Our team will be
+                    notified automatically.</p>
+
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Select Invoice</label>
+                      <select class="form-select" id="payment-invoice-select">
+                        <option value="">-- Select Invoice --</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Payment Date</label>
+                      <input type="date" class="form-control" id="payment-date">
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Upload Payment Screenshot/Receipt</label>
+                      <input type="file" class="form-control" id="payment-proof" accept="image/*,.pdf">
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Transaction Reference (Optional)</label>
+                      <input type="text" class="form-control" id="payment-reference" placeholder="Transaction ID / UTR">
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-primary" id="submit-payment">
+                        <iconify-icon icon="solar:upload-bold" class="me-2"></iconify-icon>
+                        Submit Payment Confirmation
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Support Tickets Section - With Submission Form -->
+          <div id="section-tickets" class="dashboard-section d-none">
+            <div class="card border-0 shadow-sm mb-4">
+              <div class="card-body p-5">
+                <h5 class="fw-bold mb-4">Submit New Ticket</h5>
+
+                <form id="ticket-form">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Subject <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="ticket-subject"
+                        placeholder="Brief description of your issue" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Priority <span class="text-danger">*</span></label>
+                      <select class="form-select" id="ticket-priority" required>
+                        <option value="">-- Select Priority --</option>
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                        <option value="urgent">Urgent</option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Category <span class="text-danger">*</span></label>
+                      <select class="form-select" id="ticket-category" required>
+                        <option value="">-- Select Category --</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="billing">Billing</option>
+                        <option value="project">Project Related</option>
+                        <option value="general">General Inquiry</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Description <span class="text-danger">*</span></label>
+                      <textarea class="form-control" id="ticket-description" rows="5"
+                        placeholder="Please describe your issue in detail..." required></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Attachment (Optional)</label>
+                      <input type="file" class="form-control" id="ticket-attachment" accept="image/*,.pdf,.doc,.docx">
+                      <small class="text-muted">Max file size: 10MB. Supported: Images, PDF, DOC</small>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary" id="submit-ticket">
+                        <iconify-icon icon="solar:send-bold" class="me-2"></iconify-icon>
+                        Submit Ticket
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Existing Tickets -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-5">
+                <h5 class="fw-bold mb-4">Your Tickets</h5>
+                <div id="ticketsList">
+                  <p class="text-muted">No support tickets submitted yet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Account Settings Section - With Profile Fields -->
+          <div id="section-account" class="dashboard-section d-none">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-5">
+                <h5 class="fw-bold mb-4">Account Settings</h5>
+
+                <form id="account-form">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="account-name" placeholder="Your full name" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Email Address <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" id="account-email" placeholder="your.email@company.com"
+                        required disabled>
+                      <small class="text-muted">Email cannot be changed. Contact support if needed.</small>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                      <input type="tel" class="form-control" id="account-phone" placeholder="+91 9876543210" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">WhatsApp Number <span class="text-danger">*</span></label>
+                      <input type="tel" class="form-control" id="account-whatsapp" placeholder="+91 9876543210"
+                        required>
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label">Company Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="account-company" placeholder="Your company name"
+                        required disabled>
+                      <small class="text-muted">Company name cannot be changed. Contact support if needed.</small>
+                    </div>
+                    <div class="col-12 pt-3 border-top">
+                      <div class="d-flex gap-3">
+                        <button type="submit" class="btn btn-primary" id="save-account">
+                          <iconify-icon icon="solar:check-circle-bold" class="me-2"></iconify-icon>
+                          Save Changes
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" id="cancel-account">
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <!-- Password Change Section -->
+                <div class="mt-5 pt-4 border-top">
+                  <h6 class="fw-bold mb-3">Change Password</h6>
+                  <p class="text-muted small mb-3">You can reset your password by signing out and using the "Forgot
+                    Password" option on the login page.</p>
+                  <button class="btn btn-outline-dark btn-sm">
+                    <iconify-icon icon="solar:lock-password-bold" class="me-2"></iconify-icon>
+                    Reset Password
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
   </div>
 
-  </div>
-  </div>
+  <!-- Footer -->
+  <footer class="footer bg-dark py-3 border-top border-4 border-primary">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="mb-0 text-white small">� 2024 One Layer<small>&trade;</small>. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <a href="privacy-policy.html" class="text-white text-decoration-none me-3 hover-primary small">Privacy
+            Policy</a>
+          <a href="terms-and-conditions.html" class="text-white text-decoration-none hover-primary small">Terms &
+            Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-  <!-- SCRIPTS -->
-  <script type="module" src="../assets/js/supabase.js"></script>
-  <script type="module" src="../assets/js/auth-guard.js"></script>
-  <script type="module" src="../assets/js/dashboard.js"></script>
+  <!-- Scripts -->
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/libs/aos-master/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+  <script type="module" src="../assets/js/supabase.js"></script>
+  <script type="module" src="../assets/js/dashboard.js"></script>
+
+  <!-- Custom Dashboard Styles -->
+  <style>
+    /* Sidebar Menu */
+    .sidebar {
+      position: sticky;
+      top: 70px;
+      height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+
+    .menu-link {
+      border: none;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .menu-link:hover {
+      background: white !important;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .menu-link.active {
+      background: var(--bs-primary) !important;
+    }
+
+    .menu-link.active .round-36 {
+      background: white !important;
+    }
+
+    /* Stat Cards */
+    .stat-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Section Transitions */
+    .dashboard-section {
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Footer hover effect */
+    .hover-primary:hover {
+      color: var(--bs-primary) !important;
+      transition: color 0.3s ease;
+    }
+
+    /* Responsive Sidebar */
+    @media (max-width: 991px) {
+      .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 70px;
+        z-index: 999;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .sidebar.show {
+        left: 0;
+      }
+
+      .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        display: none;
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+    }
+
+    /* Mobile hamburger button */
+    .mobile-menu-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bs-primary);
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    @media (max-width: 991px) {
+      .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  </style>
+
 </body>
 
 </html>
+

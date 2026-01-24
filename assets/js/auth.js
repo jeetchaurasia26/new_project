@@ -16,18 +16,45 @@ if (signupForm) {
     const phone = document.getElementById("phone").value;
     const whatsapp = document.getElementById("whatsapp").value;
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        shouldCreateUser: true,
-        data: { full_name, company_name, phone, whatsapp }
+    // Disable submit button
+    const submitBtn = signupForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending OTP...';
+
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: true,
+          data: { full_name, company_name, phone, whatsapp }
+        }
+      });
+
+      if (error) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return alert(error.message);
       }
-    });
 
-    if (error) return alert(error.message);
+      // Store email and redirect
+      localStorage.setItem("auth_email", email);
+      console.log("LocalStorage set: auth_email =", localStorage.getItem("auth_email"));
+      alert('OTP sent to your email! Redirecting to verification page...');
 
-    localStorage.setItem("auth_email", email);
-    window.location.href = "../html/verify-otp.html";
+      // Use relative path for universal compatibility (local and server)
+      const redirectUrl = "verify-otp.html";
+      console.log("Redirecting to:", redirectUrl);
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 500);
+
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      alert('An error occurred. Please try again.');
+      console.error(err);
+    }
   });
 }
 
@@ -42,14 +69,41 @@ if (loginForm) {
 
     const email = document.getElementById("login_email").value;
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: { shouldCreateUser: false }
-    });
+    // Disable submit button
+    const submitBtn = loginForm.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending OTP...';
 
-    if (error) return alert(error.message);
+    try {
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: { shouldCreateUser: false }
+      });
 
-    localStorage.setItem("auth_email", email);
-    window.location.href = "../html/verify-otp.html";
+      if (error) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return alert(error.message);
+      }
+
+      // Store email and redirect
+      localStorage.setItem("auth_email", email);
+      console.log("LocalStorage set: auth_email =", localStorage.getItem("auth_email"));
+      alert('OTP sent to your email! Redirecting to verification page...');
+
+      // Use relative path for universal compatibility (local and server)
+      const redirectUrl = "verify-otp.html";
+      console.log("Redirecting to:", redirectUrl);
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 500);
+
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+      alert('An error occurred. Please try again.');
+      console.error(err);
+    }
   });
 }
