@@ -84,6 +84,16 @@
                         </a>
                     </li>
                     <li class="mb-2">
+                        <a href="uploads.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:cloud-upload-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Upload Center</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
                         <a href="tickets.html"
                             class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
                             <span
@@ -138,14 +148,15 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-3 border-end">
                                         <h6 class="text-muted small fw-bold">TOTAL OUTSTANDING</h6>
-                                        <h3 class="fw-bold mb-0">₹0</h3>
+                                        <h3 class="fw-bold mb-0" id="total-outstanding-val">₹0</h3>
                                     </div>
                                     <div class="col-md-3 border-end ps-md-4">
                                         <h6 class="text-muted small fw-bold">PAID (THIS MONTH)</h6>
-                                        <h3 class="fw-bold mb-0 text-success">₹0</h3>
+                                        <h3 class="fw-bold mb-0 text-success" id="paid-month-val">₹0</h3>
                                     </div>
                                     <div class="col-md-6 ps-md-4 text-md-end">
-                                        <button class="btn btn-primary">
+                                        <button class="btn btn-primary" id="openInvoiceModalBtn" data-bs-toggle="modal"
+                                            data-bs-target="#invoiceModal">
                                             <iconify-icon icon="solar:add-circle-bold" class="me-2"></iconify-icon>
                                             Generate New Invoice
                                         </button>
@@ -191,6 +202,78 @@
         </main>
     </div>
 
+    <!-- Invoice Modal -->
+    <div class="modal fade" id="invoiceModal" tabindex="-1" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white border-bottom border-4 border-primary">
+                    <h5 class="modal-title fw-bold" id="invoiceModalLabel">Generate New Invoice</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="createInvoiceForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Select Client</label>
+                            <select class="form-select" id="invoiceClientEmail" required>
+                                <option value="">Loading clients...</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Invoice Number</label>
+                            <input type="text" class="form-control" id="invoiceNumber" placeholder="e.g. INV-001"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Amount (₹)</label>
+                            <input type="number" class="form-control" id="invoiceAmount" placeholder="0.00" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Description / Purpose</label>
+                            <textarea class="form-control" id="invoiceDescription" rows="3"
+                                placeholder="e.g. Growth Layer Subscription"></textarea>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary w-100 fw-bold py-2" id="createInvoiceBtn">
+                                Create & Send Invoice
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Verification Modal -->
+    <div class="modal fade" id="verifyModal" tabindex="-1" aria-labelledby="verifyModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white border-bottom border-4 border-primary">
+                    <h5 class="modal-title fw-bold" id="verifyModalLabel">Verify Payment</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="verifyDetailContent" class="mb-4">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div class="alert alert-info py-2 small mb-4">
+                        <iconify-icon icon="solar:info-circle-bold" class="me-1"></iconify-icon>
+                        Please verify the transaction with your bank before proceeding.
+                    </div>
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn btn-primary flex-grow-1 fw-bold" id="confirmPaidBtn">
+                            Mark as Paid
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="../../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -206,8 +289,69 @@
             AOS.init({ once: true });
 
             loadInvoices();
+            populateClientDropdown();
+            setupInvoiceForm();
             initGlobalSearch();
         });
+
+        async function populateClientDropdown() {
+            const select = document.getElementById('invoiceClientEmail');
+            if (!select) return;
+
+            try {
+                const { data, error } = await supabase.from('user_profiles').select('id, email, full_name').order('email');
+                if (error) throw error;
+
+                select.innerHTML = '<option value="">Select client...</option>' +
+                    data.map(u => `<option value="${u.email}" data-id="${u.id}">${u.full_name || u.email} (${u.email})</option>`).join('');
+            } catch (err) {
+                console.error("Error loading users:", err);
+                select.innerHTML = '<option value="">Error loading users</option>';
+            }
+        }
+
+        function setupInvoiceForm() {
+            const form = document.getElementById('createInvoiceForm');
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('createInvoiceBtn');
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating...';
+
+                try {
+                    const clientSelect = document.getElementById('invoiceClientEmail');
+                    const selectedOption = clientSelect.options[clientSelect.selectedIndex];
+
+                    const data = {
+                        client_id: selectedOption.getAttribute('data-id'),
+                        user_email: clientSelect.value,
+                        invoice_number: document.getElementById('invoiceNumber').value,
+                        amount: parseFloat(document.getElementById('invoiceAmount').value),
+                        description: document.getElementById('invoiceDescription').value,
+                        status: 'pending',
+                        created_at: new Date().toISOString()
+                    };
+
+                    const { error } = await supabase.from('invoices').insert([data]);
+                    if (error) throw error;
+
+                    alert("✅ Invoice generated successfully!");
+                    form.reset();
+                    bootstrap.Modal.getInstance(document.getElementById('invoiceModal')).hide();
+                    loadInvoices();
+
+                } catch (err) {
+                    console.error("Error creating invoice:", err);
+                    alert("❌ Error: " + err.message);
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            });
+        }
 
         async function loadInvoices(filterEmail = '') {
             const tbody = document.getElementById("adminInvoiceBody");
@@ -262,21 +406,67 @@
                 });
 
                 // Update summary
-                document.getElementById('total-outstanding-val').innerText = '₹' + data.filter(i => i.status !== 'paid').reduce((a, b) => a + b.amount, 0).toLocaleString();
-                document.getElementById('paid-month-val').innerText = '₹' + data.filter(i => i.status === 'paid').reduce((a, b) => a + b.amount, 0).toLocaleString();
+                const pending = data.filter(i => i.status !== 'paid');
+                const paid = data.filter(i => i.status === 'paid');
+
+                document.getElementById('total-outstanding-val').innerText = '₹' + pending.reduce((a, b) => a + b.amount, 0).toLocaleString();
+                document.getElementById('paid-month-val').innerText = '₹' + paid.reduce((a, b) => a + b.amount, 0).toLocaleString();
 
             } catch (err) {
                 console.error("Invoice fetch error:", err);
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center py-5 text-danger">Error loading invoices.</td></tr>';
             }
         }
 
         window.manageInvoice = async (id) => {
-            const status = confirm("Mark this invoice as PAID?") ? "paid" : null;
-            if (!status) return;
+            const { data: inv, error } = await supabase.from('invoices').select('*').eq('id', id).single();
+            if (error) return alert("Error: " + error.message);
 
-            const { error } = await supabase.from('invoices').update({ status }).eq('id', id);
-            if (error) alert("Error: " + error.message);
-            else loadInvoices();
+            const content = document.getElementById('verifyDetailContent');
+            content.innerHTML = `
+                <div class="p-3 bg-light rounded border mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="badge bg-dark">${inv.invoice_number || 'No Number'}</span>
+                        <span class="badge ${inv.status === 'review' ? 'bg-danger animate-pulse' : 'bg-warning'} text-white">
+                            ${inv.status?.toUpperCase() || 'PENDING'}
+                        </span>
+                    </div>
+                    <h4 class="fw-bold mb-0">₹${inv.amount.toLocaleString()}</h4>
+                    <p class="text-muted small mb-0">${inv.description || 'No description'}</p>
+                </div>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <small class="text-muted d-block">Transaction Ref</small>
+                        <strong class="text-primary">${inv.transaction_ref || 'Not Provided'}</strong>
+                    </div>
+                    <div class="col-6">
+                        <small class="text-muted d-block">Payment Date</small>
+                        <strong>${inv.payment_date ? new Date(inv.payment_date).toLocaleDateString() : 'N/A'}</strong>
+                    </div>
+                </div>
+            `;
+
+            const btn = document.getElementById('confirmPaidBtn');
+            btn.onclick = async () => {
+                btn.disabled = true;
+                btn.innerHTML = 'Updating...';
+
+                const { error: updateErr } = await supabase.from('invoices').update({
+                    status: 'paid',
+                    paid_at: new Date().toISOString()
+                }).eq('id', id);
+
+                if (updateErr) alert(updateErr.message);
+                else {
+                    bootstrap.Modal.getInstance(document.getElementById('verifyModal')).hide();
+                    loadInvoices();
+                }
+                btn.disabled = false;
+                btn.innerHTML = 'Mark as Paid';
+            };
+
+            const modal = new bootstrap.Modal(document.getElementById('verifyModal'));
+            modal.show();
         }
 
         function initGlobalSearch() {

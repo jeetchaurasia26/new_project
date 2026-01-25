@@ -42,6 +42,46 @@
         </div>
     </header>
 
+    <!-- Ticket Management Modal -->
+    <div class="modal fade" id="ticketModal" tabindex="-1" aria-labelledby="ticketModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white border-bottom border-4 border-primary">
+                    <h5 class="modal-title fw-bold" id="ticketModalLabel">Manage Support Ticket</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="ticketDetailContent" class="mb-4">
+                        <!-- Populated by JS -->
+                    </div>
+                    <form id="ticketResponseForm">
+                        <input type="hidden" id="manageTicketId">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Update Status</label>
+                            <select class="form-select" id="updateTicketStatus">
+                                <option value="open">Open</option>
+                                <option value="resolved">Resolved</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Internal/Client Response</label>
+                            <textarea class="form-control" id="ticketAdminResponse" rows="4"
+                                placeholder="Type your response to the client here..." required></textarea>
+                            <small class="text-muted">The client will see this response on their dashboard.</small>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary w-100 fw-bold py-2" id="saveTicketBtn">
+                                Save & Notify Client
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Main Admin Wrapper -->
     <div class="d-flex">
 
@@ -84,6 +124,16 @@
                         </a>
                     </li>
                     <li class="mb-2">
+                        <a href="uploads.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:cloud-upload-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Upload Center</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
                         <a href="tickets.html"
                             class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded active text-decoration-none">
                             <span
@@ -91,6 +141,16 @@
                                 <iconify-icon icon="solar:chat-square-call-bold" class="text-dark fs-6"></iconify-icon>
                             </span>
                             <span class="fw-medium text-dark">Support Desk</span>
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="invoices.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:card-2-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Finance Control</span>
                         </a>
                     </li>
                 </ul>
@@ -236,15 +296,57 @@
         }
 
         window.manageTicket = async (id) => {
-            const status = prompt("Update status (open/resolved/closed):", "resolved");
-            if (!status) return;
+            const { data: ticket, error } = await supabase.from('support_tickets').select('*').eq('id', id).single();
+            if (error) return alert("Error fetching ticket: " + error.message);
 
-            const { error } = await supabase.from('support_tickets').update({ status }).eq('id', id);
-            if (error) alert("Error updating: " + error.message);
-            else {
-                alert("Status updated!");
-                loadTickets();
-            }
+            document.getElementById('manageTicketId').value = id;
+            document.getElementById('updateTicketStatus').value = ticket.status || 'open';
+            document.getElementById('ticketAdminResponse').value = ticket.admin_response || '';
+
+            document.getElementById('ticketDetailContent').innerHTML = `
+                <div class="p-3 bg-light rounded border mb-3">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="badge bg-primary">Ref: #${id.slice(0, 8)}</span>
+                        <small class="text-muted">${new Date(ticket.created_at).toLocaleString()}</small>
+                    </div>
+                    <h6 class="fw-bold mb-1">${ticket.subject}</h6>
+                    <p class="mb-0 small text-dark">${ticket.message}</p>
+                </div>
+                <hr>
+                <div class="small mb-1"><span class="fw-bold">Client Email:</span> ${ticket.user_email}</div>
+                <div class="small"><span class="fw-bold">Priority:</span> <span class="text-uppercase text-danger">${ticket.priority}</span></div>
+            `;
+
+            const modal = new bootstrap.Modal(document.getElementById('ticketModal'));
+            modal.show();
+        }
+
+        const ticketForm = document.getElementById('ticketResponseForm');
+        if (ticketForm) {
+            ticketForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('saveTicketBtn');
+                const id = document.getElementById('manageTicketId').value;
+                const status = document.getElementById('updateTicketStatus').value;
+                const admin_response = document.getElementById('ticketAdminResponse').value;
+
+                btn.disabled = true;
+                btn.innerHTML = 'Saving...';
+
+                try {
+                    const { error } = await supabase.from('support_tickets').update({ status, admin_response }).eq('id', id);
+                    if (error) throw error;
+
+                    alert("✅ Ticket updated successfully!");
+                    bootstrap.Modal.getInstance(document.getElementById('ticketModal')).hide();
+                    loadTickets();
+                } catch (err) {
+                    alert("Error: " + err.message);
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = 'Save & Notify Client';
+                }
+            });
         }
 
         function initGlobalSearch() {
