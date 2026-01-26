@@ -96,8 +96,10 @@ $(function () {
                 }
 
                 // 2. Refresh detection: If it's a reload, always show (ignore session close)
-                const navEntries = performance.getEntriesByType("navigation");
-                if (navEntries.length > 0 && navEntries[0].type === 'reload') {
+                const nav = window.performance && window.performance.getEntriesByType ? window.performance.getEntriesByType("navigation")[0] : null;
+                const isReload = (nav && nav.type === 'reload') || (window.performance && window.performance.navigation && window.performance.navigation.type === 1);
+
+                if (isReload) {
                     // It's a refresh! Clear session closure so it appears
                     sessionStorage.removeItem(sessionSuppressionKey);
                     return false;
@@ -144,7 +146,7 @@ $(function () {
 
         // 2. Scroll Trigger
         $(window).on('scroll.leadPopup', function () {
-            if (!isDismissed() && window.scrollY > 400) {
+            if (!checkDismissed() && window.scrollY > 400) {
                 showPopup();
                 $(window).off('scroll.leadPopup');
             }
@@ -187,18 +189,23 @@ $(function () {
                     const { error } = await client.from('popup_leads').insert([formData]);
                     if (error) throw error;
 
-                    leadPopup.removeClass('active');
-                    leadForm.addClass('d-none');
-                    successMsg.removeClass('d-none');
+                    // Show success message inside the popup
+                    leadForm.addClass('hidden');
+                    successMsg.removeClass('d-none').addClass('visible');
                     setPermanentlyDismissed();
 
+                    // Keep popup open for 5 seconds so user can see the thank you message
                     setTimeout(() => {
-                        closePopup();
+                        if (leadPopup.length) {
+                            leadPopup.removeClass('active');
+                        }
+
+                        // Reset for any future use
                         setTimeout(() => {
-                            leadForm.removeClass('d-none');
-                            successMsg.addClass('d-none');
+                            leadForm.removeClass('hidden');
+                            successMsg.removeClass('visible').addClass('d-none');
                         }, 500);
-                    }, 4000);
+                    }, 5000);
                 } catch (err) {
                     console.error("Submission failed:", err);
                     submitBtn.prop('disabled', false).html(originalHtml).css('opacity', '1');
