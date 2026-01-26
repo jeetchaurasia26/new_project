@@ -93,6 +93,16 @@
                             <span class="fw-medium text-dark">Support Desk</span>
                         </a>
                     </li>
+                    <li class="mb-2">
+                        <a href="invoices.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:card-2-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Finance Control</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </aside>
@@ -127,11 +137,11 @@
                             <table class="table table-hover align-middle">
                                 <thead>
                                     <tr>
-                                        <th>Name / Company</th>
+                                        <th>User / Company</th>
                                         <th>Email</th>
-                                        <th>Joined Date</th>
-                                        <th>Last Active</th>
-                                        <th class="text-end">Actions</th>
+                                        <th>Status</th>
+                                        <th>Plan</th>
+                                        <th class="text-end">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody id="userListBody">
@@ -148,10 +158,141 @@
                             </table>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
         </main>
+    </div>
+
+    <!-- User Detail Modal -->
+    <div class="modal fade" id="userModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white border-0 py-3">
+                    <h5 class="modal-title fw-bold d-flex align-items-center gap-2">
+                        <iconify-icon icon="solar:user-circle-bold" class="fs-4"></iconify-icon>
+                        Client Comprehensive View
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 bg-light">
+                    <!-- Client Quick Info -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body p-3">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="round-60 bg-primary text-dark rounded-circle d-flex align-items-center justify-content-center fw-bold fs-4"
+                                        id="modalUserInitial">
+                                        ?
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h4 class="fw-bold mb-1" id="modalUserName">Loading...</h4>
+                                    <p class="text-muted mb-0" id="modalUserEmail">...</p>
+                                </div>
+                                <div class="col-auto text-end">
+                                    <span class="badge bg-success-subtle text-success border px-3 py-2">Account
+                                        Active</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4">
+                        <!-- Projects & Progress -->
+                        <div class="col-lg-7">
+                            <div class="card border-0 shadow-sm mb-4 h-100">
+                                <div class="card-header bg-white py-3 border-0">
+                                    <h6 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                                        <iconify-icon icon="solar:folder-with-files-bold"
+                                            class="text-primary"></iconify-icon>
+                                        Assigned Layers & Projects
+                                    </h6>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0">
+                                            <thead class="table-light small">
+                                                <tr>
+                                                    <th>Project Name</th>
+                                                    <th>Layer</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="modalProjectsBody">
+                                                <tr>
+                                                    <td colspan="3" class="text-center py-4 text-muted">Loading...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Support Tickets -->
+                        <div class="col-lg-5">
+                            <div class="card border-0 shadow-sm mb-4 h-100">
+                                <div class="card-header bg-white py-3 border-0">
+                                    <h6 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                                        <iconify-icon icon="solar:chat-square-call-bold"
+                                            class="text-danger"></iconify-icon>
+                                        Support History
+                                    </h6>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0">
+                                            <thead class="table-light small">
+                                                <tr>
+                                                    <th>Subject</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="modalTicketsBody">
+                                                <tr>
+                                                    <td colspan="2" class="text-center py-4 text-muted">Loading...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Invoices & Billing -->
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm mb-4">
+                                <div class="card-header bg-white py-3 border-0">
+                                    <h6 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                                        <iconify-icon icon="solar:card-2-bold" class="text-success"></iconify-icon>
+                                        Financial History
+                                    </h6>
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover align-middle mb-0">
+                                            <thead class="table-light small">
+                                                <tr>
+                                                    <th>Invoice #</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="modalInvoicesBody">
+                                                <tr>
+                                                    <td colspan="4" class="text-center py-4 text-muted">Loading...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scripts -->
@@ -168,77 +309,197 @@
             await requireAdmin();
             AOS.init({ once: true });
 
-            loadUsers();
+            await loadAllUsers();
             initSearch();
         });
 
-        async function loadUsers(filterEmail = '') {
+        // ========= AUTO-LOAD ALL USERS FUNCTIONALITY =========
+        let allUsers = []; // Cache all users
+
+        // Auto-load all users on page load
+        async function loadAllUsers() {
             const tbody = document.getElementById("userListBody");
+            tbody.innerHTML = `
+                <tr id="loadingRow">
+                    <td colspan="5" class="text-center py-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-3 text-muted">Loading all users...</p>
+                    </td>
+                </tr>
+            `;
 
-            // Logic: In a real Supabase setup, you'd fetch from a 'profiles' table.
-            // For now, mirroring the auth metadata pattern used in the project.
             try {
-                // Fetching from a placeholder API or mock until actual table is ready
-                // NOTE: Supabase doesn't allow listing users via the standard client (only Admin SDK).
-                // We'll simulate fetching from a 'profiles' table which mirrors users.
-
-                let query = supabase.from('user_profiles').select('*').order('created_at', { ascending: false });
-
-                if (filterEmail) {
-                    query = query.ilike('email', `%${filterEmail}%`);
-                }
-
-                const { data, error } = await query;
+                const { data, error } = await supabase
+                    .from('user_profiles')
+                    .select('*')
+                    .order('created_at', { ascending: false });
 
                 if (error) throw error;
 
-                if (!data || data.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="5" class="text-center py-5">No users found match your search.</td></tr>';
-                    return;
-                }
+                allUsers = data || [];
+                displayUsers(allUsers);
 
-                tbody.innerHTML = '';
-                data.forEach(user => {
-                    const row = `
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center gap-3">
-                                    <div class="round-40 bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold">
-                                        ${user.full_name?.charAt(0) || 'U'}
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold">${user.full_name || 'N/A'}</div>
-                                        <small class="text-muted">${user.company_name || 'Individual'}</small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>${user.email}</td>
-                            <td>${new Date(user.created_at).toLocaleDateString()}</td>
-                            <td><span class="badge bg-success-subtle text-success border">Active</span></td>
-                            <td class="text-end">
-                                <button class="btn btn-sm btn-outline-dark me-2" onclick="viewUser('${user.id}')">View</button>
-                                <button class="btn btn-sm btn-primary" onclick="manageUser('${user.id}')">Manage</button>
-                            </td>
-                        </tr>
-                    `;
-                    tbody.insertAdjacentHTML('beforeend', row);
-                });
+                console.log(`Loaded ${allUsers.length} users successfully`);
 
             } catch (err) {
-                console.error("User fetch error:", err);
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center py-5 text-danger">Error fetching users. Ensure the "profiles" table exists in Supabase.</td></tr>';
+                console.error('Error loading users:', err);
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-danger">
+                            <iconify-icon icon="solar:danger-circle-bold" class="fs-1 mb-2"></iconify-icon>
+                            <p class="mb-0">Failed to load users. Please refresh the page.</p>
+                            <small>${err.message}</small>
+                        </td>
+                    </tr>
+                `;
             }
         }
 
+        // Display users in table
+        function displayUsers(users) {
+            const tbody = document.getElementById("userListBody");
+
+            if (!users || users.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <iconify-icon icon="solar:user-cross-rounded-bold" class="fs-1 mb-2"></iconify-icon>
+                            <p class="mb-0">No users found matching your search.</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = users.map((user, index) => `
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="round-40 bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold">
+                                ${user.full_name?.charAt(0) || 'U'}
+                            </div>
+                            <div>
+                                <div class="fw-bold">${user.full_name || 'N/A'}</div>
+                                <small class="text-muted">${user.company_name || 'Individual'}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${user.email || 'N/A'}</td>
+                    <td><span class="badge bg-success-subtle text-success border">Active</span></td>
+                    <td><span class="badge bg-primary-subtle text-primary border">Layer 1</span></td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-dark me-2" onclick="window.viewUserDetail('${user.id}')">View Details</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.viewUserDetail = async (userId) => {
+            const user = allUsers.find(u => u.id === userId);
+            if (!user) return;
+
+            // Fill Quick Info
+            document.getElementById('modalUserName').innerText = user.full_name || 'Anonymous User';
+            document.getElementById('modalUserEmail').innerText = user.email;
+            document.getElementById('modalUserInitial').innerText = (user.full_name || 'U').charAt(0);
+
+            const modal = new bootstrap.Modal(document.getElementById('userModal'));
+            modal.show();
+
+            // Load Data Parallelly
+            try {
+                const [projects, tickets, invoices] = await Promise.all([
+                    supabase.from('client_projects').select('*').eq('client_id', userId),
+                    supabase.from('support_tickets').select('*').eq('user_email', user.email).order('created_at', { ascending: false }),
+                    supabase.from('invoices').select('*').eq('client_id', userId).order('created_at', { ascending: false })
+                ]);
+
+                // Render Projects
+                const pBody = document.getElementById('modalProjectsBody');
+                if (projects.data.length === 0) pBody.innerHTML = '<tr><td colspan="3" class="text-center py-3">No projects assigned.</td></tr>';
+                else pBody.innerHTML = projects.data.map(p => `
+                    <tr>
+                        <td class="small fw-medium">${p.project_name || p.layer_name}</td>
+                        <td><span class="badge bg-primary-subtle text-primary">${p.layer_name}</span></td>
+                        <td><span class="badge ${p.status === 'active' ? 'bg-success' : 'bg-warning'} text-white">${p.status}</span></td>
+                    </tr>
+                `).join('');
+
+                // Render Tickets
+                const tBody = document.getElementById('modalTicketsBody');
+                if (tickets.data.length === 0) tBody.innerHTML = '<tr><td colspan="2" class="text-center py-3">No support history.</td></tr>';
+                else tBody.innerHTML = tickets.data.map(t => `
+                    <tr>
+                        <td class="small">${t.subject}</td>
+                        <td><span class="badge bg-light text-dark border">${t.status}</span></td>
+                    </tr>
+                `).join('');
+
+                // Render Invoices
+                const iBody = document.getElementById('modalInvoicesBody');
+                if (invoices.data.length === 0) iBody.innerHTML = '<tr><td colspan="4" class="text-center py-3">No billing history.</td></tr>';
+                else iBody.innerHTML = invoices.data.map(i => `
+                    <tr>
+                        <td class="small">#${i.invoice_number || i.id.slice(0, 8)}</td>
+                        <td class="fw-bold">₹${i.amount.toLocaleString()}</td>
+                        <td><span class="badge ${i.status === 'paid' ? 'bg-success' : i.status === 'review' ? 'bg-danger' : 'bg-warning'} text-white">${i.status}</span></td>
+                        <td class="small">${new Date(i.created_at).toLocaleDateString()}</td>
+                    </tr>
+                `).join('');
+
+            } catch (err) {
+                console.error("Error loading user details:", err);
+            }
+        }
+
+        // Live search/filter users
+        function filterUsers(searchTerm) {
+            if (!searchTerm || searchTerm.trim() === '') {
+                // Show all users if search is empty
+                displayUsers(allUsers);
+                return;
+            }
+
+            const searchLower = searchTerm.toLowerCase().trim();
+            const filtered = allUsers.filter(user => {
+                return (
+                    (user.email && user.email.toLowerCase().includes(searchLower)) ||
+                    (user.full_name && user.full_name.toLowerCase().includes(searchLower)) ||
+                    (user.company_name && user.company_name.toLowerCase().includes(searchLower)) ||
+                    (user.id && user.id.toLowerCase().includes(searchLower)) ||
+                    (user.phone && user.phone.includes(searchLower)) ||
+                    (user.whatsapp && user.whatsapp.includes(searchLower))
+                );
+            });
+
+            displayUsers(filtered);
+            console.log(`Showing ${filtered.length} of ${allUsers.length} users`);
+        }
+
+        // Setup search with live filtering
         function initSearch() {
             const btn = document.getElementById("searchUserBtn");
             const input = document.getElementById("globalUserSearch");
 
-            btn.addEventListener("click", () => loadUsers(input.value));
+            // Live search on typing
+            input.addEventListener("input", (e) => {
+                filterUsers(e.target.value);
+            });
+
+            // Also support button click
+            btn.addEventListener("click", () => filterUsers(input.value));
+
+            // Support Enter key
             input.addEventListener("keypress", (e) => {
-                if (e.key === 'Enter') loadUsers(input.value);
+                if (e.key === 'Enter') filterUsers(input.value);
             });
         }
+
+        // Load all users on page ready
+
+        // ========= END: AUTO-LOAD USERS =========
 
         // Global Logout
         document.getElementById("logoutBtn").addEventListener("click", async () => {
@@ -296,6 +557,15 @@
         #globalUserSearch:focus {
             outline: none;
             box-shadow: none;
+        }
+
+        .round-60 {
+            width: 60px;
+            height: 60px;
+        }
+
+        .modal-xl {
+            max-width: 1140px;
         }
     </style>
 </body>

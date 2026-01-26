@@ -28,7 +28,7 @@
 
                 <!-- Page Title -->
                 <div class="col-auto d-none d-lg-block">
-                    <h6 class="mb-0 text-white fw-semibold">Admin Panel - Uploads</h6>
+                    <h6 class="mb-0 text-white fw-semibold">Admin Panel - Upload Center</h6>
                 </div>
 
                 <!-- Actions -->
@@ -93,6 +93,16 @@
                             <span class="fw-medium text-dark">Support Desk</span>
                         </a>
                     </li>
+                    <li class="mb-2">
+                        <a href="invoices.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
+                            <span
+                                class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
+                                <iconify-icon icon="solar:card-2-bold" class="text-dark fs-6"></iconify-icon>
+                            </span>
+                            <span class="fw-medium text-dark">Finance Control</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </aside>
@@ -105,8 +115,7 @@
                 <div class="row align-items-center mb-4" data-aos="fade-up">
                     <div class="col-lg-6">
                         <h2 class="fw-bold text-dark mb-1">Upload Center</h2>
-                        <p class="text-muted mb-0">Post work progress updates and weekly reports to specific clients.
-                        </p>
+                        <p class="text-muted mb-0">Manage projects, post updates, and distribute weekly reports.</p>
                     </div>
                     <div class="col-lg-6 mt-3 mt-lg-0">
                         <div class="input-group shadow-sm rounded-pill overflow-hidden bg-white border">
@@ -114,87 +123,277 @@
                                 <iconify-icon icon="solar:magnifer-linear" class="text-muted fs-5"></iconify-icon>
                             </span>
                             <input type="text" id="globalUserSearch" class="form-control border-0 py-2 bg-white"
-                                placeholder="Search user by email ID..." style="box-shadow: none;">
+                                placeholder="Search user ID/email..." style="box-shadow: none;">
                             <button class="btn btn-primary px-4 fw-bold" id="searchUserBtn"
                                 style="border-radius: 0 50px 50px 0;">Search</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="row g-4">
-                    <!-- Upload Form -->
-                    <div class="col-lg-5" data-aos="fade-up">
-                        <div class="card border-0 shadow-sm h-100">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold mb-4">New Update</h5>
-                                <form id="uploadForm">
-                                    <div class="mb-3">
-                                        <label class="form-label">Client Email ID <span
-                                                class="text-danger">*</span></label>
-                                        <input type="email" id="targetEmail" class="form-control"
-                                            placeholder="client@example.com" required>
-                                        <small class="text-muted">User must have a registered portal account.</small>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Update Type <span class="text-danger">*</span></label>
-                                        <select id="updateType" class="form-select" required>
-                                            <option value="progress">Work Progress Update</option>
-                                            <option value="report">Weekly Report PDF</option>
-                                            <option value="invoice">Billing Invoice</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3" id="progressField">
-                                        <label class="form-label">Progress Percentage (%)</label>
-                                        <input type="number" id="progressVal" class="form-control" min="0" max="100"
-                                            value="0">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Update Details / Title</label>
-                                        <input type="text" id="updateTitle" class="form-control"
-                                            placeholder="e.g. Design Phase Complete">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Upload Document (PDF/Image)</label>
-                                        <input type="file" id="updateFile" class="form-control">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary w-100 py-3 mt-2" id="submitBtn">
-                                        Post to Client Dashboard
-                                    </button>
-                                </form>
+                <!-- Layout with Tabs -->
+                <div class="row g-4 overflow-hidden">
+                    <div class="col-12" data-aos="fade-up">
+                        <div class="card border-0 shadow-sm overflow-hidden">
+                            <div class="card-header bg-white p-0 border-0">
+                                <!-- Horizontal Tabs Navigation -->
+                                <ul class="nav nav-tabs admin-tabs border-0 px-4 pt-3 gap-4" id="uploadTabs"
+                                    role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active fw-bold py-3 border-0 border-bottom border-4"
+                                            id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects-panel"
+                                            type="button" role="tab"
+                                            style="background: transparent; border-color: transparent !important;">
+                                            Manage Projects
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link fw-bold py-3 border-0 border-bottom border-4"
+                                            id="progress-tab" data-bs-toggle="tab" data-bs-target="#progress-panel"
+                                            type="button" role="tab"
+                                            style="background: transparent; border-color: transparent !important;">
+                                            Work Progress
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link fw-bold py-3 border-0 border-bottom border-4"
+                                            id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports-panel"
+                                            type="button" role="tab"
+                                            style="background: transparent; border-color: transparent !important;">
+                                            Weekly Reports
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
-                        </div>
-                    </div>
+                            <div class="card-body p-0">
+                                <div class="tab-content" id="uploadTabsContent">
+                                    <!-- PANEL 1: Manage Projects -->
+                                    <div class="tab-pane fade show active" id="projects-panel" role="tabpanel">
+                                        <div class="card border-0 shadow-sm">
+                                            <div class="card-body p-4">
+                                                <h5 class="fw-bold mb-4">
+                                                    <iconify-icon icon="solar:folder-plus-bold"
+                                                        class="text-primary"></iconify-icon>
+                                                    Assign Project/Layer to Client
+                                                </h5>
+                                                <form id="assignProjectForm">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label fw-semibold">Client Email <span
+                                                                    class="text-danger">*</span></label>
+                                                            <select id="projectUserEmail" class="form-select" required>
+                                                                <option value="">Select client...</option>
+                                                            </select>
+                                                        </div>
 
-                    <!-- Recent Uploads Log -->
-                    <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card border-0 shadow-sm h-100">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold mb-4">Recent Uploads Log</h5>
-                                <div class="table-responsive">
-                                    <table class="table table-hover align-middle">
-                                        <thead>
-                                            <tr>
-                                                <th>Client</th>
-                                                <th>Type</th>
-                                                <th>Title</th>
-                                                <th>Date</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="uploadLogBody">
-                                            <!-- To be populated dynamically -->
-                                            <tr>
-                                                <td colspan="4" class="text-center py-5 text-muted small italic">
-                                                    No recent uploads found.
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                        <div class="col-md-4">
+                                                            <label class="form-label fw-semibold">Project Layer <span
+                                                                    class="text-danger">*</span></label>
+                                                            <select id="projectLayer" class="form-select" required>
+                                                                <option value="foundation">Foundation Layer</option>
+                                                                <option value="growth">Growth Layer</option>
+                                                                <option value="scale">Scale Layer</option>
+                                                                <option value="enterprise">Enterprise Layer</option>
+                                                                <option value="global">Global Layer</option>
+                                                                <option value="data-security">Data Security Layer
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-4">
+                                                            <label class="form-label fw-semibold">Status <span
+                                                                    class="text-danger">*</span></label>
+                                                            <select id="projectStatus" class="form-select" required>
+                                                                <option value="active">Active</option>
+                                                                <option value="completed">Completed</option>
+                                                                <option value="on-hold">On Hold</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <label class="form-label fw-semibold">Start Date</label>
+                                                            <input type="date" id="projectStartDate"
+                                                                class="form-control">
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <label class="form-label fw-semibold">Expected End
+                                                                Date</label>
+                                                            <input type="date" id="projectEndDate" class="form-control">
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-primary px-4 py-2">
+                                                                <iconify-icon icon="solar:check-circle-bold"
+                                                                    class="me-2"></iconify-icon>
+                                                                Assign Project
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                <!-- Existing Projects List -->
+                                                <hr class="my-4">
+                                                <h6 class="fw-bold mb-3">
+                                                    <iconify-icon icon="solar:layers-minimalistic-bold"
+                                                        class="text-primary"></iconify-icon>
+                                                    Active Client Projects
+                                                </h6>
+                                                <div id="existingProjectsList" class="mt-3">
+                                                    <!-- Loaded from Supabase -->
+                                                    <p class="text-muted italic">No active projects found.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PANEL 2: Work Progress -->
+                                    <div class="tab-pane fade" id="progress-panel" role="tabpanel">
+                                        <div class="card border-0 shadow-sm">
+                                            <div class="card-body p-4">
+                                                <h5 class="fw-bold mb-4">
+                                                    <iconify-icon icon="solar:chart-square-bold"
+                                                        class="text-primary"></iconify-icon>
+                                                    Post Work Progress Milestone
+                                                </h5>
+                                                <form id="workProgressForm">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-6">
+                                                            <label class="form-label fw-semibold">Select Client <span
+                                                                    class="text-danger">*</span></label>
+                                                            <select id="progressUserEmail" class="form-select" required>
+                                                                <option value="">Select client...</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <label class="form-label fw-semibold">Progress Percentage
+                                                                <span class="text-danger">*</span></label>
+                                                            <div class="input-group">
+                                                                <input type="number" id="progressPercentage"
+                                                                    class="form-control" min="0" max="100" value="0"
+                                                                    required>
+                                                                <span
+                                                                    class="input-group-text bg-primary text-white">%</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label class="form-label fw-semibold">Update Title <span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="text" id="progressTitle" class="form-control"
+                                                                placeholder="e.g., Week 3 - Website Development Completed"
+                                                                required>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label class="form-label fw-semibold">Detailed
+                                                                Description</label>
+                                                            <textarea id="progressDescription" class="form-control"
+                                                                rows="4"
+                                                                placeholder="Describe the work completed, milestones achieved, next steps..."></textarea>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-primary px-4 py-2">
+                                                                <iconify-icon icon="solar:upload-bold"
+                                                                    class="me-2"></iconify-icon>
+                                                                Post Update
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                <!-- Recent Progress Updates -->
+                                                <hr class="my-4">
+                                                <h6 class="fw-bold mb-3">
+                                                    <iconify-icon icon="solar:history-bold"
+                                                        class="text-primary"></iconify-icon>
+                                                    Recent Progress Updates
+                                                </h6>
+                                                <div id="recentProgressList" class="mt-3">
+                                                    <p class="text-muted">Loading recent updates...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- PANEL 3: Weekly Reports -->
+                                    <div class="tab-pane fade" id="reports-panel" role="tabpanel">
+                                        <div class="card border-0 shadow-sm">
+                                            <div class="card-body p-4">
+                                                <h5 class="fw-bold mb-4">
+                                                    <iconify-icon icon="solar:document-text-bold"
+                                                        class="text-primary"></iconify-icon>
+                                                    Upload Weekly Report
+                                                </h5>
+                                                <div class="alert alert-info mb-4">
+                                                    <iconify-icon icon="solar:info-circle-bold"></iconify-icon>
+                                                    <strong>Note:</strong> File upload feature coming soon. For now,
+                                                    provide report details and summary.
+                                                </div>
+                                                <form id="weeklyReportForm">
+                                                    <div class="row g-3">
+                                                        <div class="col-md-6">
+                                                            <label class="form-label fw-semibold">Client Email <span
+                                                                    class="text-danger">*</span></label>
+                                                            <select id="reportUserEmail" class="form-select" required>
+                                                                <option value="">Select client...</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <label class="form-label fw-semibold">Week Number <span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="number" id="reportWeekNumber"
+                                                                class="form-control" min="1" max="52"
+                                                                placeholder="e.g., 1" required>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label class="form-label fw-semibold">Report Title <span
+                                                                    class="text-danger">*</span></label>
+                                                            <input type="text" id="reportTitle" class="form-control"
+                                                                placeholder="e.g., Week 1 Progress Report - Foundation Layer Setup"
+                                                                required>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <label class="form-label fw-semibold">Report Summary/Key
+                                                                Points <span class="text-danger">*</span></label>
+                                                            <textarea id="reportSummary" class="form-control" rows="5"
+                                                                placeholder="Summarize this week's achievements, challenges, and next steps..."
+                                                                required></textarea>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <button type="submit" class="btn btn-primary px-4 py-2">
+                                                                <iconify-icon icon="solar:cloud-upload-bold"
+                                                                    class="me-2"></iconify-icon>
+                                                                Create Report
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                                <!-- Recent Reports -->
+                                                <hr class="my-4">
+                                                <h6 class="fw-bold mb-3">
+                                                    <iconify-icon icon="solar:document-text-bold"
+                                                        class="text-primary"></iconify-icon>
+                                                    Recent Weekly Reports
+                                                </h6>
+                                                <div id="recentReportsList" class="mt-3">
+                                                    <p class="text-muted">Loading recent reports...</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </main>
     </div>
@@ -205,74 +404,278 @@
     <script src="../../assets/libs/aos-master/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 
+    <!-- Admin Domain Scripts -->
     <script type="module">
         import { requireAdmin } from "../../assets/js/admin-guard.js";
         import { supabase } from "../../assets/js/supabase.js";
 
         document.addEventListener("DOMContentLoaded", async () => {
+            // Guard: info@onelayer.in ONLY
             await requireAdmin();
             AOS.init({ once: true });
 
-            initUploadForm();
+            populateUserDropdowns();
+            loadExistingProjects();
+            loadRecentProgress();
+            loadRecentReports();
+
+            initProjectForm();
+            initProgressForm();
+            initReportForm();
             initGlobalSearch();
         });
 
-        function initUploadForm() {
-            const form = document.getElementById("uploadForm");
-            const updateTypeSelect = document.getElementById("updateType");
-            const progressField = document.getElementById("progressField");
+        // Populate user dropdowns for all 3 forms
+        async function populateUserDropdowns() {
+            try {
+                const { data: users, error } = await supabase
+                    .from('user_profiles')
+                    .select('id, email, full_name')
+                    .order('full_name');
 
-            updateTypeSelect.addEventListener("change", () => {
-                progressField.style.display = updateTypeSelect.value === 'progress' ? 'block' : 'none';
-            });
+                if (error) throw error;
 
-            form.addEventListener("submit", async (e) => {
+                const dropdowns = ['projectUserEmail', 'progressUserEmail', 'reportUserEmail'];
+                const options = '<option value="">Select client...</option>' +
+                    (users || []).map(u => `<option value="${u.email}" data-id="${u.id}">${u.full_name || u.email} (${u.email})</option>`).join('');
+
+                dropdowns.forEach(id => {
+                    const select = document.getElementById(id);
+                    if (select) select.innerHTML = options;
+                });
+            } catch (err) { console.error('Error populating users:', err); }
+        }
+
+        // 1. MANAGE PROJECTS
+        function initProjectForm() {
+            const form = document.getElementById('assignProjectForm');
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const submitBtn = document.getElementById("submitBtn");
-
-                const email = document.getElementById("targetEmail").value.trim();
-                const type = document.getElementById("updateType").value;
-                const progress = document.getElementById("progressVal").value;
-                const title = document.getElementById("updateTitle").value;
-                const fileInput = document.getElementById("updateFile");
-
-                submitBtn.disabled = true;
-                submitBtn.innerText = "Processing...";
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Assigning...';
 
                 try {
-                    // 1. Fetch user ID by email
-                    const { data: userData, error: userError } = await supabase
-                        .from('user_profiles')
-                        .select('id')
-                        .eq('email', email)
-                        .single();
+                    const userSelect = document.getElementById('projectUserEmail');
+                    const selectedOption = userSelect.options[userSelect.selectedIndex];
+                    const data = {
+                        user_email: userSelect.value,
+                        client_id: selectedOption.getAttribute('data-id'),
+                        layer_name: document.getElementById('projectLayer').value,
+                        project_name: document.getElementById('projectLayer').options[document.getElementById('projectLayer').selectedIndex].text,
+                        status: document.getElementById('projectStatus').value,
+                        start_date: document.getElementById('projectStartDate').value || null,
+                        end_date: document.getElementById('projectEndDate').value || null,
+                        created_by: 'info@onelayer.in',
+                        created_at: new Date().toISOString()
+                    };
 
-                    if (userError || !userData) {
-                        throw new Error(`User with email ${email} not found.`);
-                    }
+                    const { error } = await supabase.from('client_projects').insert([data]);
+                    if (error) throw error;
 
-                    // 2. Insert into weekly_reports
-                    const { error: postError } = await supabase
-                        .from('weekly_reports')
-                        .insert([{
-                            client_id: userData.id,
-                            week_start: new Date().toISOString().split('T')[0],
-                            report: title || 'New Weekly Update',
-                            // In real app: project_id would be selected from a list
-                        }]);
-
-                    if (postError) throw postError;
-
-                    alert(`Success: Report posted to ${email}`);
+                    alert('✅ Project assigned successfully!');
                     form.reset();
-
-                } catch (err) {
-                    alert(`Error: ${err.message}`);
+                    loadExistingProjects();
+                } catch (error) {
+                    alert('❌ Error: ' + error.message);
                 } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "Post to Client Dashboard";
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
                 }
             });
+        }
+
+        async function loadExistingProjects() {
+            const container = document.getElementById('existingProjectsList');
+            if (!container) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('client_projects')
+                    .select('*')
+                    .eq('status', 'active')
+                    .order('created_at', { ascending: false });
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = '<p class="text-muted italic">No active projects found.</p>';
+                    return;
+                }
+
+                container.innerHTML = `
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Layer</th>
+                                    <th>Status</th>
+                                    <th>Start Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map(p => `
+                                    <tr>
+                                        <td><small>${p.user_email}</small></td>
+                                        <td><span class="badge bg-primary">${p.layer_name}</span></td>
+                                        <td><span class="badge bg-success">${p.status}</span></td>
+                                        <td><small>${p.start_date || 'N/A'}</small></td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } catch (err) { console.error(err); }
+        }
+
+        // 2. WORK PROGRESS
+        function initProgressForm() {
+            const form = document.getElementById('workProgressForm');
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Posting...';
+
+                try {
+                    const userSelect = document.getElementById('progressUserEmail');
+                    const selectedOption = userSelect.options[userSelect.selectedIndex];
+                    const data = {
+                        user_email: userSelect.value,
+                        client_id: selectedOption.getAttribute('data-id'),
+                        title: document.getElementById('progressTitle').value,
+                        description: document.getElementById('progressDescription').value,
+                        progress_percentage: parseInt(document.getElementById('progressPercentage').value),
+                        created_by: 'info@onelayer.in',
+                        created_at: new Date().toISOString()
+                    };
+
+                    const { error } = await supabase.from('work_progress').insert([data]);
+                    if (error) throw error;
+
+                    alert('✅ Progress update posted successfully!');
+                    form.reset();
+                    loadRecentProgress();
+                } catch (error) {
+                    alert('❌ Error: ' + error.message);
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            });
+        }
+
+        async function loadRecentProgress() {
+            const container = document.getElementById('recentProgressList');
+            if (!container) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('work_progress')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(5);
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No progress updates yet.</p>';
+                } else {
+                    container.innerHTML = data.map(p => `
+                        <div class="card mb-2 border-0 shadow-sm bg-white">
+                            <div class="card-body p-3">
+                                <div class="d-flex justify-content-between">
+                                    <strong>${p.title}</strong>
+                                    <span class="badge bg-primary">${p.progress_percentage}%</span>
+                                </div>
+                                <small class="text-muted">${p.user_email} • ${new Date(p.created_at).toLocaleDateString()}</small>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) { console.error(err); }
+        }
+
+        // 3. WEEKLY REPORTS
+        function initReportForm() {
+            const form = document.getElementById('weeklyReportForm');
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating...';
+
+                try {
+                    const userSelect = document.getElementById('reportUserEmail');
+                    const selectedOption = userSelect.options[userSelect.selectedIndex];
+                    const data = {
+                        user_email: userSelect.value,
+                        client_id: selectedOption.getAttribute('data-id'),
+                        week_number: parseInt(document.getElementById('reportWeekNumber').value),
+                        title: document.getElementById('reportTitle').value,
+                        summary: document.getElementById('reportSummary').value,
+                        report: document.getElementById('reportSummary').value,
+                        report_url: '/reports/placeholder.pdf',
+                        status: 'pending',
+                        created_by: 'info@onelayer.in',
+                        created_at: new Date().toISOString()
+                    };
+
+                    const { error } = await supabase.from('weekly_reports').insert([data]);
+                    if (error) throw error;
+
+                    alert('✅ Weekly report created successfully!');
+                    form.reset();
+                    loadRecentReports();
+                } catch (error) {
+                    alert('❌ Error: ' + error.message);
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
+            });
+        }
+
+        async function loadRecentReports() {
+            const container = document.getElementById('recentReportsList');
+            if (!container) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('weekly_reports')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(5);
+
+                if (error) throw error;
+
+                if (!data || data.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No reports created yet.</p>';
+                } else {
+                    container.innerHTML = data.map(r => `
+                        <div class="card mb-2 border-0 shadow-sm bg-white">
+                            <div class="card-body p-3">
+                                <div class="d-flex justify-content-between">
+                                    <strong>Week ${r.week_number}: ${r.title}</strong>
+                                    <span class="badge bg-info">${r.status}</span>
+                                </div>
+                                <small class="text-muted">${r.user_email} • ${new Date(r.created_at).toLocaleDateString()}</small>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) { console.error(err); }
         }
 
         function initGlobalSearch() {
@@ -338,6 +741,18 @@
         #globalUserSearch:focus {
             outline: none;
             box-shadow: none;
+        }
+
+        /* Tabs Styling */
+        .admin-tabs .nav-link {
+            color: #6c757d;
+            border-radius: 0;
+            transition: all 0.3s ease;
+        }
+
+        .admin-tabs .nav-link.active {
+            color: #000 !important;
+            border-bottom-color: #C1FF72 !important;
         }
     </style>
 </body>

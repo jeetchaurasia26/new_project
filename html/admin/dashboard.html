@@ -55,64 +55,63 @@
                 <ul class="list-unstyled">
                     <!-- Home -->
                     <li class="mb-2">
-                        <button
-                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded active"
-                            data-section="overview">
+                        <a href="dashboard.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded active text-decoration-none">
                             <span
                                 class="round-36 bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
                                 <iconify-icon icon="solar:widget-add-bold" class="text-dark fs-6"></iconify-icon>
                             </span>
                             <span class="fw-medium text-dark">Admin Overview</span>
-                        </button>
+                        </a>
                     </li>
 
                     <!-- User Details (Management) -->
                     <li class="mb-2">
-                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
-                            data-section="users">
+                        <a href="users.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
                             <span
                                 class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
                                 <iconify-icon icon="solar:users-group-rounded-bold"
                                     class="text-dark fs-6"></iconify-icon>
                             </span>
                             <span class="fw-medium text-dark">User Details</span>
-                        </button>
+                        </a>
                     </li>
 
                     <!-- Bulk Uploads (Work/Reports) -->
                     <li class="mb-2">
-                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
-                            data-section="uploads">
+                        <a href="uploads.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
                             <span
                                 class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
                                 <iconify-icon icon="solar:cloud-upload-bold" class="text-dark fs-6"></iconify-icon>
                             </span>
                             <span class="fw-medium text-dark">Upload Center</span>
-                        </button>
+                        </a>
                     </li>
 
                     <!-- All Tickets -->
                     <li class="mb-2">
-                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
-                            data-section="tickets">
+                        <a href="tickets.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
                             <span
                                 class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
                                 <iconify-icon icon="solar:chat-square-call-bold" class="text-dark fs-6"></iconify-icon>
                             </span>
                             <span class="fw-medium text-dark">Support Desk</span>
-                        </button>
+                        </a>
                     </li>
 
                     <!-- Billing Review -->
                     <li class="mb-2">
-                        <button class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded"
-                            data-section="billing">
+                        <a href="invoices.html"
+                            class="btn w-100 text-start menu-link d-flex align-items-center gap-3 p-3 rounded text-decoration-none">
                             <span
                                 class="round-36 bg-light-gray border rounded-circle d-flex align-items-center justify-content-center flex-shrink-0">
                                 <iconify-icon icon="solar:card-2-bold" class="text-dark fs-6"></iconify-icon>
                             </span>
                             <span class="fw-medium text-dark">Finance Control</span>
-                        </button>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -149,90 +148,52 @@
                     <div id="section-overview" class="admin-tab">
                         <div class="row g-4 mb-4">
                             <div class="col-md-3">
-                                <div class="card border-0 shadow-sm p-4 h-100">
+                                <div class="card border-0 shadow-sm p-4 h-100 stat-card" data-card-type="clients"
+                                    style="cursor: pointer; transition: all 0.2s ease;">
                                     <h6 class="text-muted small text-uppercase fw-bold">Total Clients</h6>
                                     <h2 class="fw-bold mb-0" id="statTotalUsers">...</h2>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card border-0 shadow-sm p-4 h-100">
+                                <div class="card border-0 shadow-sm p-4 h-100 stat-card" data-card-type="tickets"
+                                    style="cursor: pointer; transition: all 0.2s ease;">
                                     <h6 class="text-muted small text-uppercase fw-bold">Active Tickets</h6>
                                     <h2 class="fw-bold mb-0" id="statOpenTickets" style="color: #FF7272;">...</h2>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card border-0 shadow-sm p-4 h-100">
+                                <div class="card border-0 shadow-sm p-4 h-100 stat-card" data-card-type="reports"
+                                    style="cursor: pointer; transition: all 0.2s ease;">
                                     <h6 class="text-muted small text-uppercase fw-bold">Pending Reports</h6>
                                     <h2 class="fw-bold mb-0" id="statPendingReports">...</h2>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card border-0 shadow-sm p-4 h-100">
+                                <div class="card border-0 shadow-sm p-4 h-100 stat-card" data-card-type="revenue"
+                                    style="cursor: pointer; transition: all 0.2s ease;">
                                     <h6 class="text-muted small text-uppercase fw-bold">Revenue (MTD)</h6>
                                     <h2 class="fw-bold mb-0" id="statRevenue">...</h2>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- User Details Tab -->
-                    <div id="section-users" class="admin-tab d-none">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body p-4">
-                                <div class="table-responsive">
-                                    <table class="table table-hover align-middle">
-                                        <thead>
-                                            <tr>
-                                                <th>User / Company</th>
-                                                <th>Email</th>
-                                                <th>Status</th>
-                                                <th>Plan</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="userTableBody">
-                                            <!-- To be populated dynamically -->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Upload Center Tab -->
-                    <div id="section-uploads" class="admin-tab d-none">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body p-4">
-                                <h5 class="fw-bold mb-4">Post Updates to Users</h5>
-                                <form id="bulkUpdateForm">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Target User Email <span
-                                                    class="text-danger">*</span></label>
-                                            <input type="email" id="targetUserEmail" class="form-control"
-                                                placeholder="user@example.com" required>
+                        <!-- Card Details Container -->
+                        <div class="row mt-4" id="cardDetailsContainer" style="display: none;">
+                            <div class="col-12">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="fw-bold mb-0" id="detailsTitle">Details</h5>
+                                            <button class="btn btn-sm btn-outline-secondary" id="closeDetails">
+                                                <iconify-icon icon="solar:close-circle-linear"
+                                                    class="me-1"></iconify-icon> Close
+                                            </button>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Update Type <span
-                                                    class="text-danger">*</span></label>
-                                            <select id="updateType" class="form-select" required>
-                                                <option value="progress">Work Progress Update</option>
-                                                <option value="report">Weekly Report PDF</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Message / Details</label>
-                                            <textarea id="updateMessage" class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <div class="col-12">
-                                            <label class="form-label">Document Attachment</label>
-                                            <input type="file" id="updateFile" class="form-control">
-                                        </div>
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary">Post to User Portal</button>
+                                        <div id="detailsContent" class="mt-3">
+                                            <!-- Dynamic content will be loaded here -->
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -240,6 +201,9 @@
                 </div>
             </div>
         </main>
+    </div>
+    </div>
+    </main>
     </div>
 
     <!-- Scripts -->
@@ -318,6 +282,521 @@
             await supabase.auth.signOut();
             window.location.replace("../sign-in.html");
         });
+
+        // ========= CLICKABLE STAT CARDS FUNCTIONALITY =========
+        function initClickableStatCards() {
+            const statCards = document.querySelectorAll('.stat-card');
+
+            statCards.forEach(card => {
+                // Click handler
+                card.addEventListener('click', async () => {
+                    const cardType = card.dataset.cardType;
+                    await loadCardDetails(cardType);
+                });
+
+                // Hover effects
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px)';
+                    card.style.boxShadow = '0 4px 12px rgba(193, 255, 114, 0.3)';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '';
+                });
+            });
+
+            // Close button handler
+            const closeBtn = document.getElementById('closeDetails');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    document.getElementById('cardDetailsContainer').style.display = 'none';
+                });
+            }
+        }
+
+        // Load card details based on type
+        async function loadCardDetails(type) {
+            const container = document.getElementById('cardDetailsContainer');
+            const titleEl = document.getElementById('detailsTitle');
+            const contentEl = document.getElementById('detailsContent');
+
+            // Show container and loading state
+            container.style.display = 'block';
+            contentEl.innerHTML = `
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-3 text-muted">Loading data...</p>
+                </div>
+            `;
+
+            // Scroll to details
+            container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            try {
+                let data, title, html;
+
+                switch (type) {
+                    case 'clients':
+                        title = 'All Registered Clients';
+                        const { data: users, error: usersError } = await supabase
+                            .from('user_profiles')
+                            .select('*')
+                            .order('created_at', { ascending: false });
+
+                        if (usersError) throw usersError;
+                        html = renderClientsTable(users || []);
+                        break;
+
+                    case 'tickets':
+                        title = 'Active Support Tickets';
+                        const { data: tickets, error: ticketsError } = await supabase
+                            .from('support_tickets')
+                            .select('*')
+                            .eq('status', 'open')
+                            .order('created_at', { ascending: false });
+
+                        if (ticketsError) throw ticketsError;
+                        html = renderTicketsTable(tickets || []);
+                        break;
+
+                    case 'reports':
+                        title = 'Pending Reports';
+                        const { data: reports, error: reportsError } = await supabase
+                            .from('weekly_reports')
+                            .select('*')
+                            .order('created_at', { ascending: false });
+
+                        if (reportsError) throw reportsError;
+                        html = renderReportsTable(reports || []);
+                        break;
+
+                    case 'revenue':
+                        title = 'Revenue Details (Month-to-Date)';
+                        const { data: invoices, error: invoicesError } = await supabase
+                            .from('invoices')
+                            .select('*')
+                            .eq('status', 'paid')
+                            .order('created_at', { ascending: false });
+
+                        if (invoicesError) throw invoicesError;
+                        html = renderRevenueTable(invoices || []);
+                        break;
+                }
+
+                titleEl.textContent = title;
+                contentEl.innerHTML = html;
+
+            } catch (error) {
+                console.error('Error loading card details:', error);
+                contentEl.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>Error:</strong> Failed to load data. ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Helper: Render clients table
+        function renderClientsTable(users) {
+            if (users.length === 0) {
+                return '<p class="text-muted text-center py-4">No clients found.</p>';
+            }
+
+            return `
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Company</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${users.map((user, index) => `
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${user.full_name || 'N/A'}</td>
+                                    <td>${user.company_name || 'N/A'}</td>
+                                    <td>${user.email || 'N/A'}</td>
+                                    <td>${user.phone || 'N/A'}</td>
+                                    <td>${user.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Helper: Render tickets table
+        function renderTicketsTable(tickets) {
+            if (tickets.length === 0) {
+                return '<p class="text-muted text-center py-4">No active tickets.</p>';
+            }
+
+            return `
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Subject</th>
+                                <th>User Email</th>
+                                <th>Priority</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tickets.map(ticket => `
+                                <tr>
+                                    <td><code>#${ticket.id.substring(0, 8)}</code></td>
+                                    <td>${ticket.subject || 'No subject'}</td>
+                                    <td>${ticket.user_email || 'N/A'}</td>
+                                    <td><span class="badge bg-warning">${ticket.priority || 'Normal'}</span></td>
+                                    <td>${ticket.created_at ? new Date(ticket.created_at).toLocaleDateString() : 'N/A'}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Helper: Render reports table
+        function renderReportsTable(reports) {
+            if (reports.length === 0) {
+                return '<p class="text-muted text-center py-4">No pending reports.</p>';
+            }
+
+            return `
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Report ID</th>
+                                <th>User Email</th>
+                                <th>Week</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${reports.map(report => `
+                                <tr>
+                                    <td><code>#${report.id.substring(0, 8)}</code></td>
+                                    <td>${report.user_email || 'N/A'}</td>
+                                    <td>${report.week_number || 'N/A'}</td>
+                                    <td><span class="badge bg-info">${report.status || 'Pending'}</span></td>
+                                    <td>${report.created_at ? new Date(report.created_at).toLocaleDateString() : 'N/A'}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Helper: Render revenue table
+        function renderRevenueTable(invoices) {
+            if (invoices.length === 0) {
+                return '<p class="text-muted text-center py-4">No revenue data for this month.</p>';
+            }
+
+            const total = invoices.reduce((sum, inv) => sum + (inv.amount || 0), 0);
+
+            return `
+                <div class="alert alert-success mb-3">
+                    <strong>Total Revenue (MTD):</strong> ₹${total.toLocaleString('en-IN')}
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Client Email</th>
+                                <th>Amount</th>
+                                <th>Payment Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${invoices.map(invoice => `
+                                <tr>
+                                    <td><code>${invoice.invoice_number || '#' + invoice.id.substring(0, 8)}</code></td>
+                                    <td>${invoice.user_email || 'N/A'}</td>
+                                    <td class="fw-bold" style="color: #10b981;">₹${(invoice.amount || 0).toLocaleString('en-IN')}</td>
+                                    <td>${invoice.paid_at ? new Date(invoice.paid_at).toLocaleDateString() : new Date(invoice.created_at).toLocaleDateString()}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initClickableStatCards();
+        });
+        // ========= END: CLICKABLE STAT CARDS =========
+
+        // ========= UPLOAD CENTER FUNCTIONALITY =========
+        // Populate user dropdowns for all 3 forms
+        async function populateUserDropdowns() {
+            try {
+                const { data: users, error } = await supabase
+                    .from('user_profiles')
+                    .select('id, email, full_name')
+                    .order('full_name');
+
+                if (error) throw error;
+
+                const dropdowns = ['projectUserEmail', 'progressUserEmail', 'reportUserEmail'];
+                const options = '<option value="">Select client...</option>' +
+                    (users || []).map(u => `<option value="${u.email}" data-id="${u.id}">${u.full_name || u.email} (${u.email})</option>`).join('');
+
+                dropdowns.forEach(id => {
+                    const select = document.getElementById(id);
+                    if (select) select.innerHTML = options;
+                });
+
+                console.log(`Populated dropdowns with ${users?.length || 0} users`);
+            } catch (err) {
+                console.error('Error populating user dropdowns:', err);
+            }
+        }
+
+        // 1. MANAGE PROJECTS - Assign Project/Layer
+        const assignProjectForm = document.getElementById('assignProjectForm');
+        if (assignProjectForm) {
+            assignProjectForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Assigning...';
+
+                try {
+                    const userSelect = document.getElementById('projectUserEmail');
+                    const selectedOption = userSelect.options[userSelect.selectedIndex];
+                    const data = {
+                        user_email: userSelect.value,
+                        client_id: selectedOption.getAttribute('data-id'),
+                        layer_name: document.getElementById('projectLayer').value,
+                        project_name: document.getElementById('projectLayer').options[document.getElementById('projectLayer').selectedIndex].text,
+                        status: document.getElementById('projectStatus').value,
+                        start_date: document.getElementById('projectStartDate').value || null,
+                        end_date: document.getElementById('projectEndDate').value || null,
+                        created_by: 'info@onelayer.in',
+                        created_at: new Date().toISOString()
+                    };
+
+                    // Save to Supabase
+                    const { error } = await supabase.from('client_projects').insert([data]);
+                    if (error) throw error;
+
+                    console.log('Project data saved to Supabase:', data);
+                    alert('✅ Project assigned successfully!');
+                    e.target.reset();
+                    loadExistingProjects();
+
+                } catch (error) {
+                    console.error('Error assigning project:', error);
+                    alert('❌ Error: ' + error.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            });
+        }
+
+        // Load existing projects list
+        async function loadExistingProjects() {
+            const container = document.getElementById('existingProjectsList');
+            if (!container) return;
+
+            container.innerHTML = '<p class="text-muted">Loading projects...</p>';
+
+            try {
+                // Load from Supabase
+                const { data, error } = await supabase
+                    .from('client_projects')
+                    .select('*')
+                    .eq('status', 'active')
+                    .order('created_at', { ascending: false });
+                if (error) throw error;
+
+                if (data.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No active projects yet.</p>';
+                } else {
+                    container.innerHTML = `
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Layer</th>
+                                        <th>Status</th>
+                                        <th>Start Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${data.map(p => `
+                                        <tr>
+                                            <td>${p.user_email}</td>
+                                            <td><span class="badge bg-primary">${p.layer_name}</span></td>
+                                            <td><span class="badge bg-success">${p.status}</span></td>
+                                            <td>${p.start_date || 'Not set'}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                console.error('Error loading projects:', err);
+                container.innerHTML = '<p class="text-danger">Error loading projects.</p>';
+            }
+        }
+
+        // 2. WORK PROGRESS - Post Update
+        const workProgressForm = document.getElementById('workProgressForm');
+        if (workProgressForm) {
+            workProgressForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Posting...';
+
+                try {
+                    const userSelect = document.getElementById('progressUserEmail');
+                    const selectedOption = userSelect.options[userSelect.selectedIndex];
+                    const data = {
+                        user_email: userSelect.value,
+                        client_id: selectedOption.getAttribute('data-id'),
+                        title: document.getElementById('progressTitle').value,
+                        description: document.getElementById('progressDescription').value,
+                        progress_percentage: parseInt(document.getElementById('progressPercentage').value),
+                        created_by: 'info@onelayer.in',
+                        created_at: new Date().toISOString()
+                    };
+
+                    // Save to Supabase
+                    const { error } = await supabase.from('work_progress').insert([data]);
+                    if (error) throw error;
+
+                    console.log('Progress data saved to Supabase:', data);
+                    alert('✅ Progress update posted successfully!');
+                    e.target.reset();
+                    document.getElementById('progressPercentage').value = '0';
+                    loadRecentProgress();
+
+                } catch (error) {
+                    console.error('Error posting progress:', error);
+                    alert('❌ Error: ' + error.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            });
+        }
+
+        // Load recent progress updates
+        async function loadRecentProgress() {
+            const container = document.getElementById('recentProgressList');
+            if (!container) return;
+
+            container.innerHTML = '<p class="text-muted">Loading recent updates...</p>';
+
+            try {
+                // Load from Supabase
+                const { data, error } = await supabase
+                    .from('work_progress')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(5);
+                if (error) throw error;
+
+                if (data.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No progress updates yet.</p>';
+                } else {
+                    container.innerHTML = data.map(p => `
+                        <div class="card mb-2">
+                            <div class="card-body p-3">
+                                <div class="d-flex justify-content-between">
+                                    <strong>${p.title}</strong>
+                                    <span class="badge bg-primary">${p.progress_percentage}%</span>
+                                </div>
+                                <small class="text-muted">${p.user_email} • ${new Date(p.created_at).toLocaleDateString()}</small>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (err) {
+                console.error('Error loading progress:', err);
+                container.innerHTML = '<p class="text-danger">Error loading progress updates.</p>';
+            }
+        }
+
+        // 3. WEEKLY REPORTS - Create Report
+        const weeklyReportForm = document.getElementById('weeklyReportForm');
+        if (weeklyReportForm) {
+            weeklyReportForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Creating...';
+
+                try {
+                    const userSelect = document.getElementById('reportUserEmail');
+                    const selectedOption = userSelect.options[userSelect.selectedIndex];
+                    const data = {
+                        user_email: userSelect.value,
+                        client_id: selectedOption.getAttribute('data-id'),
+                        week_number: parseInt(document.getElementById('reportWeekNumber').value),
+                        title: document.getElementById('reportTitle').value,
+                        summary: document.getElementById('reportSummary').value,
+                        report: document.getElementById('reportSummary').value, // Map to existing column
+                        report_url: '/reports/placeholder.pdf', // Placeholder until file upload is implemented
+                        status: 'pending',
+                        created_by: 'info@onelayer.in',
+                        created_at: new Date().toISOString()
+                    };
+
+                    // Save to Supabase
+                    const { error } = await supabase.from('weekly_reports').insert([data]);
+                    if (error) throw error;
+
+                    console.log('Report data saved to Supabase:', data);
+                    alert('✅ Weekly report created successfully!');
+                    e.target.reset();
+                    loadRecentReports();
+
+                } catch (error) {
+                    console.error('Error creating report:', error);
+                    alert('❌ Error: ' + error.message);
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initClickableStatCards();
+        });
+        // ========= END: CLICKABLE STAT CARDS =========
     </script>
 
     <style>
