@@ -2,44 +2,132 @@
 <html lang="en">
 
 <head>
-
-  <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "One Layer™",
-  "url": "https://www.onelayer.in/",
-  "logo": "https://www.onelayer.in/assets/images/logos/onelayer-logo-dark.svg",
-  "description": "One Layer™ is a business infrastructure company that builds scalable systems for growth, automation, data, and global expansion.",
-  "foundingLocation": {
-    "@type": "Place",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "IN"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.onelayer.in/#organization",
+      "name": "One Layer™",
+      "url": "https://www.onelayer.in/",
+      "logo": "https://www.onelayer.in/assets/images/logos/onelayer-logo-dark.svg",
+      "description": "One Layer™ is a global business infrastructure company that builds structured systems for growth, automation, data security, and global scalability.",
+      "sameAs": [
+        "https://www.instagram.com/onelayer.in/",
+        "https://x.com/Onelayer_in",
+        "https://www.linkedin.com/company/110922346/",
+        "https://www.youtube.com/@Onelayerin"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "business consultation",
+        "email": "info@onelayer.in",
+        "telephone": "+91-828-781-8375",
+        "availableLanguage": ["English"]
+      }
+    },
+
+    {
+      "@type": "WebPage",
+      "@id": "https://www.onelayer.in/#homepage",
+      "url": "https://www.onelayer.in/",
+      "name": "One Layer™ – Business Infrastructure Company",
+      "isPartOf": {
+        "@id": "https://www.onelayer.in/#organization"
+      },
+      "about": {
+        "@id": "https://www.onelayer.in/#organization"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.onelayer.in/assets/images/og/onelayer-cover.jpg"
+      }
+    },
+
+    {
+      "@type": "ItemList",
+      "@id": "https://www.onelayer.in/#infrastructure-layers",
+      "name": "One Layer Business Infrastructure Layers",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "itemListElement": [
+        {
+          "@type": "Service",
+          "position": 1,
+          "name": "Foundation Layer",
+          "url": "https://www.onelayer.in/foundation-layer.html",
+          "description": "Builds the digital backbone of a business including brand, website, CRM, and core automation."
+        },
+        {
+          "@type": "Service",
+          "position": 2,
+          "name": "Growth Layer",
+          "url": "https://www.onelayer.in/growth-layer.html",
+          "description": "Drives predictable customer acquisition through SEO, paid media, funnels, and reporting."
+        },
+        {
+          "@type": "Service",
+          "position": 3,
+          "name": "Scale Layer",
+          "url": "https://www.onelayer.in/scale-layer.html",
+          "description": "Implements automation, AI systems, and optimized workflows to scale operations efficiently."
+        },
+        {
+          "@type": "Service",
+          "position": 4,
+          "name": "Enterprise Layer",
+          "url": "https://www.onelayer.in/enterprise-layer.html",
+          "description": "Enterprise-grade infrastructure for complex teams, governance, and performance control."
+        },
+        {
+          "@type": "Service",
+          "position": 5,
+          "name": "Global Layer",
+          "url": "https://www.onelayer.in/global-layer.html",
+          "description": "Infrastructure for international operations, cross-border compliance, and global scalability."
+        },
+        {
+          "@type": "Service",
+          "position": 6,
+          "name": "Data & Security Layer",
+          "url": "https://www.onelayer.in/data-security-layer.html",
+          "description": "Structured data governance, access control, and compliance-ready security infrastructure."
+        }
+      ]
+    },
+
+    {
+      "@type": "CreativeWork",
+      "@id": "https://www.onelayer.in/#projects",
+      "name": "One Layer Featured Projects",
+      "url": "https://www.onelayer.in/projects.html",
+      "creator": {
+        "@id": "https://www.onelayer.in/#organization"
+      }
+    },
+
+    {
+      "@type": "Service",
+      "@id": "https://www.onelayer.in/#consultation",
+      "name": "Business Infrastructure Consultation",
+      "provider": {
+        "@id": "https://www.onelayer.in/#organization"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceLocation": {
+          "@type": "VirtualLocation",
+          "url": "https://www.onelayer.in/contact.html"
+        }
+      }
     }
-  },
-  "sameAs": [
-    "https://www.instagram.com/onelayer.in/",
-    "https://x.com/Onelayer_in",
-    "https://www.linkedin.com/company/110922346/",
-    "https://www.youtube.com/@Onelayerin"
   ]
 }
 </script>
 
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "One Layer™",
-  "url": "https://www.onelayer.in/",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://www.onelayer.in/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
+
+
+
 
 
   <!-- Google Tag Manager -->
@@ -67,17 +155,21 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>One Layer™ | Business Infrastructure Company for Scalable Growth</title>
+  <title>One Layer™ – Business Infrastructure Company for Growth, Automation & Global Scale</title>
 
   <meta name="description"
-    content="One Layer™ is a business infrastructure company helping startups and growing businesses build, scale, automate, and expand globally with structured digital systems." />
+  content="One Layer™ is a global business infrastructure company providing growth systems, SEO, marketing, automation, CRM, data security, and scalable digital operations for startups and enterprises." />
 
   <meta name="keywords"
-    content="business infrastructure company, digital infrastructure, business automation, CRM setup, scalable business systems, startup infrastructure, enterprise systems, One Layer" />
-  <meta conical="https://onelayer.in/" />
+  content="business infrastructure company, digital infrastructure, business automation, CRM setup, scalable business systems, startup infrastructure, enterprise systems, One Layer" />
+  <link rel="canonical" href="https://www.onelayer.in/" />
   <meta name="google-site-verification" content="" />
   <meta robots="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-  <link rel="canonical" href="https://onelayer.in/" />
+  
+  <link rel="alternate" hreflang="en" href="https://www.onelayer.in/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.onelayer.in/" />
+
+
 
   <meta name="author" content="One Layer™" />
   <meta name="publisher" content="One Layer™" />
@@ -90,7 +182,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="One Layer™ | The Backbone of Modern Businesses" />
   <meta property="og:description"
-    content="We build structured business infrastructure that helps companies grow, automate, and scale globally." />
+  content="We build structured business infrastructure that helps companies grow, automate, and scale globally." />
   <meta property="og:url" content="https://www.onelayer.in/" />
   <meta property="og:image" content="https://www.onelayer.in/assets/images/og/onelayer-cover.jpg" />
   <meta property="og:site_name" content="One Layer™" />
@@ -101,8 +193,6 @@
   <meta name="twitter:description" content="Structured systems for scalable business growth." />
   <meta name="twitter:image" content="https://www.onelayer.in/assets/images/og/onelayer-cover.jpg" />
 
-
-  <link rel="canonical" href="https://www.onelayer.in/" />
 
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.svg" />
   <link rel="stylesheet" href="../assets/libs/owl.carousel/dist/assets/owl.carousel.min.css">
@@ -213,6 +303,9 @@
   <!--  Page Wrapper -->
   <div class="page-wrapper overflow-hidden">
 
+    <section class="visually-hidden">
+
+
     <!--  Banner Section -->
     <section class="banner-section position-relative d-flex align-items-end min-vh-100">
       <video class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover" autoplay muted loop playsinline>
@@ -236,7 +329,7 @@
             <h6 class="fs-6 text-white text-opacity-80 mb-3">
               The Backbone of Modern Businesses
             </h6>
-
+              <h2 class="visually-hidden">Growth, Marketing, Automation & Global Scaling Systems</h2>
 
             <a href="javascript:void(0)" class="p-1 ps-7 bg-primary rounded-pill">
               <span class="bg-white round-52 rounded-circle d-flex align-items-center justify-content-center">
@@ -326,6 +419,26 @@
         <img src="../assets/images/backgrounds/stats-facts-bg.svg" alt="About One Layer™" class="img-fluid">
       </div>
     </section>
+
+
+    <!--  What is One Layer Section -->
+
+<h2>What is One Layer?</h2>
+<p>
+One Layer is a global business infrastructure company that helps startups, enterprises, and growing businesses build marketing systems, SEO, automation, CRM, data security, and scalable digital operations under one unified structure.
+</p>
+</section>
+
+
+    
+    <p class="visually-hidden">
+One Layer™ provides <a href="/seo-services.html">SEO services</a>,
+<a href="/digital-marketing.html">digital marketing</a>,
+<a href="/crm-automation.html">CRM automation</a>,
+<a href="/data-security-layer.html">data security infrastructure</a>
+for global businesses.
+</p>
+
 
 
 
@@ -1669,7 +1782,7 @@
                 data-aos-duration="1000">
                 <a href="blog-details.html"
                   class="resources-img resources-img-first position-relative overflow-hidden d-block">
-                  <img src="../assets/images/resources/resources-1.jpg" alt="resources" class="img-fluid">
+                  <img src="../assets/images/resources/resources-1.jpg" alt="team-img" class="img-fluid">
                 </a>
                 <div class="resources-details">
                   <p class="mb-0">Dec 24, 2025</p>
@@ -1681,7 +1794,7 @@
               <div class="resources d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="200"
                 data-aos-duration="1000">
                 <a href="blog-details.html" class="resources-img position-relative overflow-hidden d-block">
-                  <img src="../assets/images/resources/resources-2.jpg" alt="resources" class="img-fluid">
+                  <img src="../assets/images/resources/resources-2.jpg" alt="team-img" class="img-fluid">
                 </a>
                 <div class="resources-details">
                   <p class="mb-0">Dec 24, 2025</p>
@@ -1693,7 +1806,7 @@
               <div class="resources d-flex flex-column gap-6" data-aos="fade-up" data-aos-delay="300"
                 data-aos-duration="1000">
                 <a href="blog-details.html" class="resources-img position-relative overflow-hidden d-block">
-                  <img src="../assets/images/resources/resources-3.jpg" alt="resources" class="img-fluid">
+                  <img src="../assets/images/resources/resources-3.jpg" alt="team-img" class="img-fluid">
                 </a>
                 <div class="resources-details">
                   <p class="mb-0">Dec 24, 2025</p>
@@ -1705,6 +1818,7 @@
         </div>
       </div>
     </section>
+
 
     <!--  Get in touch Section -->
     <section class="get-in-touch py-5 py-lg-8 py-xl-10">
