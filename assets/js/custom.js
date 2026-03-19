@@ -268,4 +268,21 @@ $(function () {
         });
     }
 
+    // Multi-Step Popup Transition logic
+    $(document).on('click', '#continueToClaimBtn', function () {
+        $('#introCard').addClass('slide-out-left');
+        $('#formCard').addClass('slide-in');
+    });
+
+    $(document).on('click', '.close-form-card', function () {
+        // Trigger the original close logic which sets session suppression
+        $('#closePopup').trigger('click');
+
+        // Reset state for next trigger (logic for next time user visits/refreshes)
+        setTimeout(() => {
+            $('#introCard').removeClass('slide-out-left');
+            $('#formCard').removeClass('slide-in');
+        }, 500);
+    });
+
 });

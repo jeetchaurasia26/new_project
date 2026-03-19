@@ -1,0 +1,296 @@
+/* ============================================
+   NeuralOrbit Mini Avatar — Isolated Styles
+   Only loaded on html/index.html
+   Zero impact on styles.css or any other file
+   ============================================ */
+
+:root {
+    --banner-color: #C1FF72;
+    --robot-body: #2d2d44;
+    --robot-light: #4a4a6a;
+    --eye-color: #ffffff;
+}
+
+/* ── Container ────────────────────────────── */
+.mini-avatar-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: avatarFloat 3s ease-in-out infinite;
+}
+
+@keyframes avatarFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ── Celebration Banner ───────────────────── */
+.celebration-banner {
+    position: relative;
+    background: var(--banner-color);
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: -15px;
+    box-shadow: 0 8px 32px rgba(193, 255, 114, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    min-width: 140px;
+    text-align: center;
+    animation: avatarGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes avatarGlow {
+    from {
+        box-shadow: 0 8px 32px rgba(193, 255, 114, 0.4);
+    }
+
+    to {
+        box-shadow: 0 8px 48px rgba(193, 255, 114, 0.7);
+    }
+}
+
+/* Speech-bubble triangle */
+.celebration-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--banner-color);
+}
+
+.banner-text-small {
+    color: #000000;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.banner-text-large {
+    color: #000000;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.banner-text-sub {
+    color: #333333;
+    font-size: 0.65rem;
+    font-weight: 500;
+}
+
+/* ── Close Button ─────────────────────────── */
+.banner-close {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    color: #000000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    line-height: 1;
+}
+
+.banner-close:hover {
+    background: #000000;
+    color: var(--banner-color);
+    transform: scale(1.1);
+}
+
+/* ── Robot Avatar ─────────────────────────── */
+.robot-avatar {
+    width: 80px;
+    height: 100px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Head */
+.robot-head {
+    width: 50px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--robot-body) 0%, var(--robot-light) 100%);
+    border-radius: 12px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Face / Screen */
+.robot-face {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 24px;
+    background: #1a1a2e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Eyes */
+.robot-eye {
+    width: 8px;
+    height: 8px;
+    background: var(--eye-color);
+    border-radius: 50%;
+    animation: avatarBlink 4s infinite;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes avatarBlink {
+
+    0%,
+    96%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    98% {
+        transform: scaleY(0.1);
+    }
+}
+
+/* Body */
+.robot-body {
+    width: 40px;
+    height: 35px;
+    background: linear-gradient(180deg, var(--robot-light) 0%, var(--robot-body) 100%);
+    border-radius: 0 0 15px 15px;
+    margin-top: -5px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Arms */
+.robot-arm {
+    position: absolute;
+    width: 8px;
+    height: 25px;
+    background: var(--robot-light);
+    border-radius: 4px;
+    top: 5px;
+    z-index: 3;
+}
+
+.robot-arm.left {
+    left: -12px;
+    transform: rotate(-20deg);
+    transform-origin: top center;
+    animation: avatarWaveLeft 2s ease-in-out infinite;
+}
+
+.robot-arm.right {
+    right: -12px;
+    transform: rotate(20deg);
+    transform-origin: top center;
+    animation: avatarWaveRight 2s ease-in-out infinite;
+}
+
+@keyframes avatarWaveLeft {
+
+    0%,
+    100% {
+        transform: rotate(-20deg);
+    }
+
+    50% {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes avatarWaveRight {
+
+    0%,
+    100% {
+        transform: rotate(20deg);
+    }
+
+    50% {
+        transform: rotate(30deg);
+    }
+}
+
+/* Hands */
+.robot-hand {
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--robot-body);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hidden state — instant hide/show (no transition) */
+.mini-avatar-container.avatar-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Responsive ───────────────────────────── */
+
+/* Tablet */
+@media (max-width: 991px) {
+    .mini-avatar-container {
+        bottom: 15px;
+        left: 15px;
+        transform: scale(0.95);
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .mini-avatar-container {
+        bottom: 10px;
+        left: 10px;
+        transform: scale(0.6);
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .mini-avatar-container {
+        transform: scale(0.5);
+        bottom: 8px;
+        left: 8px;
+    }
+}
